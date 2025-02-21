@@ -1,0 +1,61 @@
+name: CanvasPal CI/CD
+
+on:
+	push:
+		branches: [ main ]
+	pull_request:
+		branches: [ main ]
+
+jobs:
+	build:
+		runs-on: ubuntu-latest
+		
+		strategy:
+			matrix:
+				node-version: [16.x, 18.x]
+
+		steps:
+		- uses: actions/checkout@v3
+		
+		- name: Use Node.js ${{ matrix.node-version }}
+			uses: actions/setup-node@v3
+			with:
+				node-version: ${{ matrix.node-version }}
+				cache: 'npm'
+		
+		- name: Install dependencies
+			run: npm ci
+		
+		- name: Lint
+			run: |
+				npm run lint
+				npm run prettier:check
+		
+		- name: Type check
+			run: npm run type-check
+		
+		- name: Test
+			run: |
+				npm run test
+				npm run test:coverage
+		
+		- name: Build
+			run: npm run build
+		
+		- name: Upload coverage
+			uses: codecov/codecov-action@v3
+			with:
+				token: ${{ secrets.CODECOV_TOKEN }}
+		
+		- name: Package Extension
+			if: github.ref == 'refs/heads/main'
+			run: |
+				npm run package
+				zip -r canvaspal.zip dist/
+
+		- name: Upload Artifact
+			if: github.ref == 'refs/heads/main'
+			uses: actions/upload-artifact@v3
+			with:
+				name: canvaspal-extension
+				path: canvaspal.zip

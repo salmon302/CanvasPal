@@ -1,0 +1,1155 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:icalendar-ruby
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Seth Nenninger Calendar (Canvas)
+X-WR-CALDESC:Calendar events for the user\, Seth Nenninger
+BEGIN:VEVENT
+DTSTAMP:20250124T163700Z
+UID:event-assignment-6157747
+DTSTART;VALUE=DATE;VALUE=DATE:20250121
+CLASS:PUBLIC
+DESCRIPTION:Submit a pdf with screenshots of your notebook with output. The
+  screenshots should be cropped and clear enough to see code and output wit
+ hout zooming in more than once. Please do not take screenshots with your p
+ hone\, taking screenshots on your machine is super easy\, just google it i
+ f you are not sure how to do it. Thanks for the effort!\n\nPlease - See ma
+ terial in related Page and Files folder and announcements.\n\nTask: Fill i
+ n the blanks for the given regular expressions in the code (file below) an
+ d submit a PDF per instructions above.\n\nGrading: Since this is practice 
+ I will give the participation points for your effort and you will not lose
+  points if you are little/somewhat incorrect. Very incomplete subs or thos
+ e that are far from a correct regex for this task will likely lose points.
+ \n\nWe will discuss the solution in next class so please bring questions t
+ hen. In the meantime\, you are welcome to ask questions in office hours\, 
+ anything other than a quick question over email is not possible to answer.
+ \n\n[regex practice dates.txt] (https://fgcu.instructure.com/courses/55585
+ 1/files/53594014?wrap=1)\n\n 
+SEQUENCE:0
+SUMMARY:Practice with Regex (Participation) [CEN 4930 - CRN 14005 - F - 202
+ 501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555851&month=01&year=2025#assignment_6157747
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p><strong>Su
+ bmit a pdf with screenshots of your notebook with output. The screenshots 
+ should be cropped and clear enough to see code and output without zooming 
+ in more than once. Please do not take screenshots with your phone\, taking
+  screenshots on your machine is super easy\, just google it if you are not
+  sure how to do it. Thanks for the effort!</strong></p>\n<p><strong>Please
+  - See material in related Page and Files folder and announcements.<br></s
+ trong></p>\n<p><strong>Task: Fill in the blanks for the given regular expr
+ essions in the code (file below) and submit a PDF per instructions above.<
+ br></strong></p>\n<p>Grading: Since this is practice I will give the parti
+ cipation points for your effort and you will not lose points if you are li
+ ttle/somewhat incorrect. Very incomplete subs or those that are far from a
+  correct regex for this task will likely lose points.</p>\n<p>We will disc
+ uss the solution in next class so please bring questions then. In the mean
+ time\, you are welcome to ask questions in office hours\, anything other t
+ han a quick question over email is not possible to answer.</p>\n<p><a id="
+ 48816895" class="instructure_file_link instructure_scribd_file inline_disa
+ bled" title="Link" href="https://fgcu.instructure.com/courses/555851/files
+ /53594014?wrap=1" target="_blank" data-canvas-previewable="true" data-api-
+ endpoint="https://fgcu.instructure.com/api/v1/courses/555851/files/5359401
+ 4" data-api-returntype="File">regex practice dates.txt</a></p>\n<p>&nbsp\;
+ </p><script src="https://instructure-uploads.s3.us-east-1.amazonaws.com/ac
+ count_10510000000000082/attachments/42217273/fgcu.instructure.com-global-j
+ avascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250123T183000Z
+UID:event-assignment-6167359
+DTSTART:20250123T194500Z
+DTEND:20250123T194500Z
+CLASS:PUBLIC
+DESCRIPTION:Topic: Chapter 1 + Lecture slides\n\nInstructions:\n\n* Review 
+ all applicable lectures.\n\n* Complete the assigned reading\n\n* To be com
+ pleted during class time on Jan 23\, 2025\n\n* 5 questions\n\n* Open books
+  and open notes\, closed Internet\n\n 
+SEQUENCE:0
+SUMMARY:Requirements Quiz#1 [CEN 3073 - CRN 10416 - TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _556273&month=01&year=2025#assignment_6167359
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p>Topic: Cha
+ pter 1 + Lecture slides</p>\n<p><strong>Instructions</strong><strong>:</st
+ rong></p>\n<ol>\n<li>Review all applicable lectures.</li>\n<li>Complete th
+ e assigned reading</li>\n<li>To be completed during class time on Jan 23\,
+  2025</li>\n<li>5 questions</li>\n<li>Open books and open notes\, closed I
+ nternet</li>\n</ol>\n<p>&nbsp\;</p><script src="https://instructure-upload
+ s.s3.us-east-1.amazonaws.com/account_10510000000000082/attachments/4221727
+ 3/fgcu.instructure.com-global-javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250207T075700Z
+UID:event-assignment-6170925
+DTSTART:20250128T074500Z
+DTEND:20250128T074500Z
+CLASS:PUBLIC
+DESCRIPTION:Form teams/group with 5 members that you will stick with all se
+ mester.\n\nGive me the names of each team member\, and I will create the t
+ eams on Canvas.\n\nSome teams have already been formed. If you are not in 
+ a team please let me know.\n\nDefine requirements based on the description
+  given for "Prescribing Medication":\n\n* Define requirements that focus o
+ n features and constraints.\n\n* Categorize your requirements as either fu
+ nctional or non-functional requirements\n\n*  Each student will make a co
+ mment on another team's post\, about a requirement their team or another t
+ eam overlooked\, or omitted\, or misclassified.\n\n* This part is individu
+ al work.\n\nDescription Prescribing Medication:\n\n* The record of the pat
+ ient must be open for input. Click on the medication field and select eith
+ er ‘current medication’\, ‘new medication’ or ‘formulary’.\n\n
+ * If you select ‘current medication’\, you will be asked to check the 
+ dose\; If you wish to change the dose\, enter the new dose then confirm th
+ e prescription.\n\n* If you choose\, ‘new medication’\, the system ass
+ umes you know which medication you wish to prescribe. Type the first few l
+ etters of the drug name. You will then see a list of possible drugs starti
+ ng with these letters. Choose the required medication. You will then be as
+ ked to check that the medication you have selected is correct. Enter the d
+ ose then confirm the prescription.\n\n* If you choose ‘formulary’\, yo
+ u will be presented with a search box for the approved formulary. Search f
+ or the drug required then select it. You will then be asked to check that 
+ the medication you have selected is correct. Enter the dose then confirm t
+ he prescription.\n\n* In all cases\, the system will check that the dose i
+ s within the approved range and will ask you to change it if it is outside
+  the range of recommended doses.\n\n* After you have confirmed the prescri
+ ption\, it will be displayed for checking. Either click ‘OK’ or ‘Cha
+ nge’. If you click ‘OK’ your prescription will be recorded on the au
+ dit database. If you click ‘Change’\, you re-enter the ‘Prescribing 
+ Medication’ process.\n\nAdditional Information:\n\n* Before posting your
+  answer to the discussion make sure you are in a group on Canvas.\n\n* Eac
+ h team will submit ONE(1) post on this discussion with your answers to que
+ stions A-C\n\n* Name the file PrescribeMedicationRequirements-Group#\n\n* 
+ Ensure that everything you have written is saved in a document before post
+ ing to the discussion.\n\n* You can find your group# if you click on the P
+ eople Tab On Canvas\n\n* Formatting:\n\n* Ensure that your post is well fo
+ rmatted and contains the name of each team member\,  Exercise title\, dat
+ e  course name and course CRN at the top of the post
+SEQUENCE:0
+SUMMARY:Group Exercise- Write appropriate requirements for Prescribing Medi
+ cation   [CEN 3073 - CRN 10416 - TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _556273&month=01&year=2025#assignment_6170925
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p>Form teams
+ /group with 5 members that you will stick with all semester.</p>\n<p>Give 
+ me the names of each team member\, and I will create the teams on Canvas.<
+ /p>\n<p>Some teams have already been formed. If you are not in a team plea
+ se let me know.</p>\n<p><i>Define requirements based on the description gi
+ ven for </i><strong><i>"Prescribing Medication":</i></strong></p>\n<ol sty
+ le="list-style-type: upper-alpha\;">\n<li>Define requirements that f<i>ocu
+ s on features and constraints.</i></li>\n<li><i>Categorize your requiremen
+ ts as either functional or non-functional requirements</i></li>\n<li><i>&n
+ bsp\;Each student will make a comment on another team's post\, about a req
+ uirement their team or another team overlooked\, or omitted\, or misclassi
+ fied.</i>\n<ol style="list-style-type: upper-alpha\;">\n<li><i>This part i
+ s individual work.</i></li>\n</ol>\n</li>\n</ol>\n<p>Description Prescribi
+ ng Medication:</p>\n<ul>\n<li>The record of the patient must be open for i
+ nput. Click on the medication field and select either ‘current medicatio
+ n’\, ‘new medication’ or ‘formulary’.</li>\n<li>If you select 
+ ‘current medication’\, you will be asked to check the dose\; If you wi
+ sh to change the dose\, enter the new dose then confirm the prescription.<
+ /li>\n<li>If you choose\, ‘new medication’\, the system assumes you kn
+ ow which medication you wish to prescribe. Type the first few letters of t
+ he drug name. You will then see a list of possible drugs starting with the
+ se letters. Choose the required medication. You will then be asked to chec
+ k that the medication you have selected is correct. Enter the dose then co
+ nfirm the prescription.</li>\n<li>If you choose ‘formulary’\, you will
+  be presented with a search box for the approved formulary. Search for the
+  drug required then select it. You will then be asked to check that the me
+ dication you have selected is correct. Enter the dose then confirm the pre
+ scription.</li>\n<li>In all cases\, the system will check that the dose is
+  within the approved range and will ask you to change it if it is outside 
+ the range of recommended doses.</li>\n<li>After you have confirmed the pre
+ scription\, it will be displayed for checking. Either click ‘OK’ or 
+ ‘Change’. If you click ‘OK’ your prescription will be recorded on 
+ the <u>audit database</u>. If you click ‘Change’\, you re-enter the 
+ ‘Prescribing Medication’ process.</li>\n</ul>\n<p>Additional Informati
+ on:</p>\n<ul>\n<li>Before posting your answer to the discussion make sure 
+ <strong><span style="color: #000000\;"><span style="text-decoration: under
+ line\;">you are in a group on Canvas</span>.</span></strong></li>\n<li>Eac
+ h team will submit ONE(1) post on this discussion with your answers to que
+ stions A-C<br>\n<ul>\n<li>Name the file PrescribeMedicationRequirements-Gr
+ oup#\n<ul>\n<li><span style="color: #e03e2d\;">Ensure that everything you 
+ have written is saved in a document before posting to the discussion. </sp
+ an></li>\n</ul>\n</li>\n<li>You can find your group# if you click on the P
+ eople Tab On Canvas</li>\n<li>Formatting:\n<ul>\n<li>Ensure that your post
+  is <u>well formatted </u>and contains the name of each team member\,&nbsp
+ \; Exercise title\, date&nbsp\; course name and course CRN <u>at the top</
+ u> of the post<strong><br></strong></li>\n</ul>\n</li>\n</ul>\n</li>\n</ul
+ ><script src="https://instructure-uploads.s3.us-east-1.amazonaws.com/accou
+ nt_10510000000000082/attachments/42217273/fgcu.instructure.com-global-java
+ script-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250128T170000Z
+UID:event-assignment-6170771
+DTSTART;VALUE=DATE;VALUE=DATE:20250130
+CLASS:PUBLIC
+DESCRIPTION:Instructions:\n\n* Please read the following documents before c
+ ompleting this quiz:\n\n* https://ethics.acm.org/code-of-ethics/software-e
+ ngineering-code/\n\n* You can take this quiz up to three(3) times\n\n* You
+ r highest score will be recorded
+SEQUENCE:0
+SUMMARY:Review The Software Engineering Code of Ethics Reading Assignment &
+  Quiz [CEN 3073 - CRN 10416 - TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _556273&month=01&year=2025#assignment_6170771
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p><span>Inst
+ ructions:</span></p>\n<ul>\n<li><span>Please read the following documents 
+ before completing this quiz:</span>\n<ul>\n<li><a href="https://ethics.acm
+ .org/code-of-ethics/software-engineering-code/">https://ethics.acm.org/cod
+ e-of-ethics/software-engineering-code/</a></li>\n<li><span>You can take th
+ is quiz up to three(3) times</span>\n<ul>\n<li><span>Your highest score wi
+ ll be recorded</span></li>\n</ul>\n</li>\n</ul>\n</li>\n</ul><script src="
+ https://instructure-uploads.s3.us-east-1.amazonaws.com/account_10510000000
+ 000082/attachments/42217273/fgcu.instructure.com-global-javascript-CLEAN.j
+ s"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250201T010900Z
+UID:event-assignment-6168696
+DTSTART;VALUE=DATE;VALUE=DATE:20250130
+CLASS:PUBLIC
+DESCRIPTION:[Assignment-2_ Testing Document.docx] (https://fgcu.instructure
+ .com/courses/555700/files/53702459?wrap=1)\n\n[E-Commerce_TestCases.xlsx] 
+ (https://fgcu.instructure.com/courses/555700/files/53702709?wrap=1)[] (htt
+ ps://fgcu.instructure.com/courses/555700/files/53702710?wrap=1)\n\n[E-Comm
+ erce website testing empty.xlsx] (https://fgcu.instructure.com/courses/555
+ 700/files/53702710?wrap=1)\n\n[Specifications for a test document.docx] (h
+ ttps://fgcu.instructure.com/courses/555700/files/53706707?wrap=1)\n\n \n\
+ n 
+SEQUENCE:0
+SUMMARY:Test Case document writing in Excel or Word [CEN 4072 - CRN 10420 -
+  TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555700&month=01&year=2025#assignment_6168696
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p><a class="
+ instructure_file_link instructure_scribd_file inline_disabled" title="Assi
+ gnement 2_ Testing Document.docx" href="https://fgcu.instructure.com/cours
+ es/555700/files/53702459?wrap=1" target="_blank" data-canvas-previewable="
+ false" data-api-endpoint="https://fgcu.instructure.com/api/v1/courses/5557
+ 00/files/53702459" data-api-returntype="File">Assignment-2_ Testing Docume
+ nt.docx</a></p>\n<p><a class="instructure_file_link instructure_scribd_fil
+ e inline_disabled" title="E-Commerce_TestCases.xlsx" href="https://fgcu.in
+ structure.com/courses/555700/files/53702709?wrap=1" target="_blank" data-c
+ anvas-previewable="false" data-api-endpoint="https://fgcu.instructure.com/
+ api/v1/courses/555700/files/53702709" data-api-returntype="File">E-Commerc
+ e_TestCases.xlsx</a><a class="instructure_file_link instructure_scribd_fil
+ e inline_disabled" title="E-Commerce website testing empty.xlsx" href="htt
+ ps://fgcu.instructure.com/courses/555700/files/53702710?wrap=1" target="_b
+ lank" data-canvas-previewable="false" data-api-endpoint="https://fgcu.inst
+ ructure.com/api/v1/courses/555700/files/53702710" data-api-returntype="Fil
+ e"></a></p>\n<p><a class="instructure_file_link instructure_scribd_file in
+ line_disabled" title="E-Commerce website testing empty.xlsx" href="https:/
+ /fgcu.instructure.com/courses/555700/files/53702710?wrap=1" target="_blank
+ " data-canvas-previewable="false" data-api-endpoint="https://fgcu.instruct
+ ure.com/api/v1/courses/555700/files/53702710" data-api-returntype="File">E
+ -Commerce website testing empty.xlsx</a></p>\n<p><a class="instructure_fil
+ e_link instructure_scribd_file inline_disabled" title="Specifications for 
+ a test document.docx" href="https://fgcu.instructure.com/courses/555700/fi
+ les/53706707?wrap=1" target="_blank" data-canvas-previewable="false" data-
+ api-endpoint="https://fgcu.instructure.com/api/v1/courses/555700/files/537
+ 06707" data-api-returntype="File">Specifications for a test document.docx<
+ /a></p>\n<p>&nbsp\;</p>\n<p>&nbsp\;</p><script src="https://instructure-up
+ loads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachments/422
+ 17273/fgcu.instructure.com-global-javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250214T153700Z
+UID:event-assignment-6157746
+DTSTART;VALUE=DATE;VALUE=DATE:20250203
+CLASS:PUBLIC
+DESCRIPTION:This will close by 11am on Tuesday without penalty. No late sub
+ mits accepted after that time.\n\nThis practice must be done in a notebook
+  using colab or similar\, you need to add your own name in the comments I 
+ already have in the code and take (partial or cropped) screenshots of your
+  notebook cells showing your code and the output results (a few cells are 
+ required\, not the entire notebook).\n\n* Subs must be professional: no ph
+ one screenshots! google how to take screenshots on your laptop/computer.\n
+ \n* Images must be cropped and clear/easy to see without much effort\, for
+  someone who needs to check about 25 subs please!\n\nAs it is participatio
+ n based\, I kept it to a few basic commands with pandas. You should review
+  the pandas material in the pandas page and especially https://realpython.
+ com/pandas-python-explore-dataset/ and other links we have already explore
+ d in class.\n\nUse the practice txt as a basis in Files folder\n\n3 - Prac
+ tice with pandas and spam\n\nand use your judgement for creating the cells
+  as applicable.\n\n 
+SEQUENCE:0
+SUMMARY:Participation practice with pandas [CEN 4930 - CRN 14005 - F - 2025
+ 01]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555851&month=02&year=2025#assignment_6157746
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p><strong>Th
+ is will close by 11am on Tuesday without penalty. No late submits accepted
+  after that time.<br></strong></p>\n<p><strong>This practice must be done 
+ in a notebook using colab or similar\, you need to add your own name in th
+ e comments I already have in the code and take <span style="text-decoratio
+ n: underline\;">(partial or cropped) screenshots of your notebook cells sh
+ owing your code and the output results </span>(a few cells are required\, 
+ not the entire notebook).</strong></p>\n<ul>\n<li>Subs must be professiona
+ l: no phone screenshots! google how to take screenshots on your laptop/com
+ puter.</li>\n<li>Images must be cropped and clear/easy to see without much
+  effort\, for someone who needs to check about 25 subs please!</li>\n</ul>
+ \n<p>As it is participation based\, I kept it to a few basic commands with
+  pandas. You should review the pandas material in the pandas page and espe
+ cially <a href="https://realpython.com/pandas-python-explore-dataset/" tar
+ get="_blank">https://realpython.com/pandas-python-explore-dataset/</a> and
+  other links we have already explored in class.</p>\n<p>Use the practice t
+ xt as a basis in Files folder</p>\n<p><strong><span class="ellipsis">3 - P
+ ractice with pandas and spam</span></strong></p>\n<p>and use your judgemen
+ t for creating the cells as applicable.</p>\n<p>&nbsp\;</p><script src="ht
+ tps://instructure-uploads.s3.us-east-1.amazonaws.com/account_1051000000000
+ 0082/attachments/42217273/fgcu.instructure.com-global-javascript-CLEAN.js"
+ ></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250130T230000Z
+UID:event-assignment-6171062
+DTSTART;VALUE=DATE;VALUE=DATE:20250203
+CLASS:PUBLIC
+DESCRIPTION:Topics covered:\n\nTest Documentation\n\nAgile methodology\n\nB
+ lack box testing\n\nLevels of testing
+SEQUENCE:0
+SUMMARY:Test Documents\, Agile Method\, Black box testing & Levels of testi
+ ng [CEN 4072 - CRN 10420 - TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555700&month=02&year=2025#assignment_6171062
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p><span styl
+ e="font-size: 14pt\;"><strong>Topics covered:</strong></span></p>\n<p>Test
+  Documentation</p>\n<p>Agile methodology</p>\n<p>Black box testing</p>\n<p
+ >Levels of testing</p><script src="https://instructure-uploads.s3.us-east-
+ 1.amazonaws.com/account_10510000000000082/attachments/42217273/fgcu.instru
+ cture.com-global-javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250210T213700Z
+UID:event-assignment-6171431
+DTSTART;VALUE=DATE;VALUE=DATE:20250206
+CLASS:PUBLIC
+DESCRIPTION:Total points: 50 points\n\nExplain in detail with one example t
+ he following black box testing techniques:\n\n1. State Transition diagram\
+ n\n2. Decision Table technique\n\n3. Use Case technique\n\n4. Equivalence 
+ Partitioning\n\n5. Boundary Value analysis\n\n \n\nRubric: Each technique
+  - 10 points.
+SEQUENCE:0
+SUMMARY:Black box testing examples [CEN 4072 - CRN 10420 - TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555700&month=02&year=2025#assignment_6171431
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p>Total poin
+ ts: 50 points</p>\n<p>Explain in detail with one example the following bla
+ ck box testing techniques:</p>\n<p>1. State Transition diagram</p>\n<p>2. 
+ Decision Table technique</p>\n<p>3. Use Case technique</p>\n<p>4. Equivale
+ nce Partitioning</p>\n<p>5. Boundary Value analysis</p>\n<p>&nbsp\;</p>\n<
+ p>Rubric: Each technique - 10 points.</p><script src="https://instructure-
+ uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachments/4
+ 2217273/fgcu.instructure.com-global-javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250214T153700Z
+UID:event-assignment-6157755
+DTSTART;VALUE=DATE;VALUE=DATE:20250207
+CLASS:PUBLIC
+DESCRIPTION:In class and on paper.\n\nQuizzes cannot be made up outside of 
+ class for many reasons mostly logistics. If you have a medical excuse with
+  documentation or something similar please come and talk to me or email me
+  asap.\n\nTopics: working with text\, BOW (see the folder and page on Canv
+ as)\, and classification (see slides lecture#2\, definition\, train/test s
+ et and accuracy calculation).\n\n* There is NO code to write or notebooks-
+ related questions on the quiz\, focus on concepts and applications of the 
+ concepts.\n\nIf you missed class please talk to classmates who attended an
+ d/or plan to visit office hours before the quiz.
+SEQUENCE:0
+SUMMARY:Q2 (BOW\, classification) [CEN 4930 - CRN 14005 - F - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555851&month=02&year=2025#assignment_6157755
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p>In class a
+ nd on paper.</p>\n<p>Quizzes cannot be made up outside of class for many r
+ easons mostly logistics. If you have a medical excuse with documentation o
+ r something similar please come and talk to me or email me asap.</p>\n<p><
+ strong>Topics: working with text\, BOW (see the folder and page on Canvas)
+ \, and classification (see slides lecture#2\, definition\, train/test set 
+ and accuracy calculation).</strong></p>\n<ul>\n<li>There is NO code to wri
+ te or notebooks-related questions on the quiz\, focus on concepts and appl
+ ications of the concepts.</li>\n</ul>\n<p>If you missed class please talk 
+ to classmates who attended and/or plan to visit office hours before the qu
+ iz.</p><script src="https://instructure-uploads.s3.us-east-1.amazonaws.com
+ /account_10510000000000082/attachments/42217273/fgcu.instructure.com-globa
+ l-javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250212T213800Z
+UID:event-assignment-6172596
+DTSTART;VALUE=DATE;VALUE=DATE:20250209
+CLASS:PUBLIC
+DESCRIPTION:Instructions for screen recording:       (50 points)\n\nRef
+ er to the video posted under the Week 5 module in Canvas.\n\nGo to https:/
+ /www.atlassian.com/software/jira\n Sign in with your Google account or lo
+ g in with your valid email.\n\n1.   Login to your Jira account\n2.    
+ You will end up on a JIRA software homepage\n3.    Select Project\, and 
+ create a new project with Scrum framework\n4.    Select Company project.
+ \n5.    Then you will have a scrum framework assigned for your project\n
+ 6.    Create issues based on your requirement (Test Scenario as epic and
+  Test cases as stories)\n7.    And create sprint for selected backlogs\n
+ 10.  Play on the status board and start a sprint.\n\nScreen record the ab
+ ove process and share the file in the submission. (voice-over is optional)
+SEQUENCE:0
+SUMMARY:Home work Feb 06th-Jira Hands On Screen recording [CEN 4072 - CRN 1
+ 0420 - TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555700&month=02&year=2025#assignment_6172596
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p>Instructio
+ ns for screen recording:&nbsp\; &nbsp\; &nbsp\; &nbsp\;(50 points)</p>\n<p
+ >Refer to the video posted under the Week 5 module in Canvas.</p>\n<p>Go t
+ o https://www.atlassian.com/software/jira<br>&nbsp\;Sign in with your Goog
+ le account or log in with your valid email.</p>\n<p>1.&nbsp\; &nbsp\;Login
+  to your Jira account<br>2.&nbsp\; &nbsp\; You will end up on a JIRA softw
+ are homepage<br>3. &nbsp\; &nbsp\;Select Project\, and create a new projec
+ t with Scrum framework<br>4. &nbsp\; &nbsp\;Select Company project.<br>5. 
+ &nbsp\; &nbsp\;Then you will have a scrum framework assigned for your proj
+ ect<br>6. &nbsp\; &nbsp\;Create issues based on your requirement (Test Sce
+ nario as epic and Test cases as stories)<br>7. &nbsp\; &nbsp\;And create s
+ print for selected backlogs<br>10.&nbsp\; Play on the status board and sta
+ rt a sprint.</p>\n<p>Screen record the above process and share the file in
+  the submission. (voice-over is optional)</p><script src="https://instruct
+ ure-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachmen
+ ts/42217273/fgcu.instructure.com-global-javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250204T171900Z
+UID:event-assignment-6147130
+DTSTART;VALUE=DATE;VALUE=DATE:20250210
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Chapter 3 Quiz [COP 3710 - CRN 14033 - TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _559165&month=02&year=2025#assignment_6147130
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250212T205600Z
+UID:event-assignment-6157750
+DTSTART;VALUE=DATE;VALUE=DATE:20250210
+CLASS:PUBLIC
+DESCRIPTION:You must join a group either alone or with someone else by end 
+ of class on Friday 2/7 (if you miss class\, please coordinate with classma
+ tes\, delaying this will likely hurt your progress so it is your responsib
+ ility to be aware of what is going on in class when you missed a meeting).
+ \n\nThe goal is for everyone to start working on the project1. See any ann
+ ouncements and Page [Project 1] (https://fgcu.instructure.com/courses/5558
+ 51/pages/project-1?wrap=1)\n\nIssues with data: For project1\, some may en
+ counter issues\, e.g. there might be blanks or missing values or formattin
+ g issues. In summary\, there are always issues when dealing with data\, an
+ d many ways to work around these issues: e.g.\, for some\, dropna() might 
+ work\, you might need to do dropna(inplace=True). Others used "text.values
+ .astype('U')" to convert their text data variable.\n\nPlease submit a pdf 
+ by the deadline with:\n\n* your names\n\n* a half page description for EAC
+ H of the two datasets (200 or so words) IN YOUR OWN WORDS\, including:\n\n
+ * for any numbers\, it helps if you use a table or bulleted lists rather t
+ han embedding numbers in text \n\n* what are we trying to predict here? w
+ hat do the class labels 0 and 1 represent? (see the Page above for my copy
+  of the description of each dataset\, just write 1-2 sentence summary for 
+ each dataset)\n\n* how many records in each file (train vs dev) \n\n* how
+  many records for each class label in each file (train vs dev)\n\n* the nu
+ mber of unique terms or tokens in each file (train vs dev). For this you c
+ an use the scikit-learn code we have already used for vectorizers\, see th
+ e previous notebooks. There are other ways to do this and of course feel f
+ ree to google or use other tools to find out. This particular part is only
+  worth up to 2 points out of 10.\n\nAttention: the data is likely too larg
+ e for colab and/or the vectorizer or other things you try using scikit-lea
+ rn. Just use a subset of the data that does fit in memory instead of submi
+ tting nothing (e.g. the first 10K records or if that does not work the fir
+ st 5K records and so on. Make sure to have a representative sample of the 
+ labels\, for example it would be bad to have only 0 labels records in that
+  subset). Briefly describe what you did in 1 sentence\, clear and specific
+ .\n\nThis first submission is to show effort and that you explored the dat
+ a so I will grade this more leniently than the final sub for the project.\
+ n\nIf you have questions please do not wait for the last minute\, instead 
+ plan to stop by office hours ahead of the deadline. Also if you need help 
+ with code\, please come to class with questions or code to show me\, it is
+  hard to review code in submissions and then help you later.
+SEQUENCE:0
+SUMMARY:Project1 initial [CEN 4930 - CRN 14005 - F - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555851&month=02&year=2025#assignment_6157750
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p><strong>Yo
+ u must join a group either alone or with someone else by end of class on F
+ riday 2/7 (if you miss class\, please coordinate with classmates\, delayin
+ g this will likely hurt your progress so it is your responsibility to be a
+ ware of what is going on in class when you missed a meeting).</strong></p>
+ \n<p>The goal is for everyone to start working on the project1. <span styl
+ e="text-decoration: underline\;">See any announcements and Page <a title="
+ Project 1" href="https://fgcu.instructure.com/courses/555851/pages/project
+ -1?wrap=1" data-api-endpoint="https://fgcu.instructure.com/api/v1/courses/
+ 555851/pages/project-1" data-api-returntype="Page">Project 1</a><br></span
+ ></p>\n<div class="userMessage">\n<p><strong>Issues with data:</strong> Fo
+ r project1\, some may encounter issues\, e.g. there might be blanks or mis
+ sing values or formatting issues. In summary\, there are always issues whe
+ n dealing with data\, and many ways to work around these issues: e.g.\, fo
+ r some\, dropna() might work\, you might need to do dropna(inplace=True). 
+ Others used "text.values.astype('U')" to convert their text data variable.
+ </p>\n</div>\n<p><span style="text-decoration: underline\;">Please submit 
+ a pdf by the deadline with:</span></p>\n<ul>\n<li><span style="color: #843
+ fa1\;">your names</span></li>\n<li>a half page <span style="color: #843fa1
+ \;"><strong>description for</strong></span> EACH of the two datasets (200 
+ or so words)<strong> IN YOUR OWN WORDS</strong>\, including:</li>\n<li>for
+  any numbers\, it helps if you use a table or bulleted lists rather than e
+ mbedding numbers in text&nbsp\;\n<ul>\n<li>what are we trying to predict h
+ ere? what do the class <strong>labels </strong>0 and 1 represent? (see the
+  Page above for my copy of the description of each dataset\, just write 1-
+ 2 sentence summary for each dataset)</li>\n<li>how many <strong>records </
+ strong>in each file (train vs dev)&nbsp\;</li>\n<li>how many records for e
+ ach class <strong>label </strong>in each file (train vs dev)</li>\n<li>the
+  number of <strong>unique </strong>terms or tokens in each file (train vs 
+ dev). For this you can use the scikit-learn code we have already used for 
+ vectorizers\, see the previous notebooks. There are other ways to do this 
+ and of course feel free to google or use other tools to find out. This par
+ ticular part is only worth up to 2 points out of 10.</li>\n</ul>\n</li>\n<
+ /ul>\n<p><strong>Attention: the data is likely too large for colab and/or 
+ the vectorizer or other things you try using scikit-learn. Just use a subs
+ et of the data that does fit in memory instead of submitting nothing (e.g.
+  the first 10K records or if that does not work the first 5K records and s
+ o on. Make sure to have a representative sample of the labels\, for exampl
+ e it would be bad to have only 0 labels records in that subset). Briefly d
+ escribe what you did in 1 sentence\, clear and specific.<br></strong></p>\
+ n<p>This first submission is to show effort and that you explored the data
+  so I will grade this more leniently than the final sub for the project.</
+ p>\n<p>If you have questions please do not wait for the last minute\, inst
+ ead plan to stop by office hours ahead of the deadline. Also if you need h
+ elp with code\, please come to class with questions or code to show me\, i
+ t is hard to review code in submissions and then help you later.</p><scrip
+ t src="https://instructure-uploads.s3.us-east-1.amazonaws.com/account_1051
+ 0000000000082/attachments/42217273/fgcu.instructure.com-global-javascript-
+ CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250211T183000Z
+UID:event-assignment-6172931
+DTSTART:20250211T194500Z
+DTEND:20250211T194500Z
+CLASS:PUBLIC
+DESCRIPTION:*\n\nTopics include:\n\n1.Chapter 1: Introduction to Requiremen
+ ts Engineering (in the required textbook)\n\n2.Chapter 2 Preparing for Req
+ uirements Elicitation (in the required textbook)\n\n3.PowerPoint Lecture s
+ lides\n\nInstructions:\n\n*\n\n* You are allowed to use open books and not
+ es. \n\n* You are not permitted to use the Internet during this exam.\n\n
+ * Cell phones\, electronic watches and other electronic devices must be of
+ f and out of reach.\n\n* This exam must be  taken during class time  (1:
+ 30PM - 2:45 PM) on February 11\, 2025 in SH 127 with the instructor presen
+ t in the classroom.\n\n* All students take the exam at the same time.\n\n*
+  You will get full credit for a question if you answer the question correc
+ tly and completely.\n\n* Answer all questions before submitting this quiz.
+SEQUENCE:0
+SUMMARY: Exam One - CEN3073-CRN10416- (1:30PM - 2:45PM)  [CEN 3073 - CRN 10
+ 416 - TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _556273&month=02&year=2025#assignment_6172931
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><ul>\n<li cla
+ ss="description user_content teacher-version enhanced">\n<p>Topics include
+ :</p>\n<p>1.Chapter 1: Introduction to Requirements Engineering (in the re
+ quired textbook)</p>\n<p>2.Chapter 2 Preparing for Requirements Elicitatio
+ n (in the required textbook)</p>\n<p>3.PowerPoint Lecture slides</p>\n<p>I
+ nstructions:</p>\n<ul>\n<li style="list-style-type: none\;">\n<ul>\n<li>Yo
+ u are allowed to use open books and notes.&nbsp\;\n<ul>\n<li><span style="
+ color: #e03e2d\;">You are not permitted to use the Internet during this ex
+ am.</span></li>\n<li><strong>Cell phones\, electronic watches and other el
+ ectronic devices must be off and out of reach.</strong></li>\n</ul>\n</li>
+ \n<li><span>This exam must be</span><span>&nbsp\;</span><span> taken durin
+ g class time&nbsp\; (<strong>1:30PM - 2:45 PM</strong>) on February 11\, 2
+ 025 in SH 127 with the instructor present in the classroom.</span></li>\n<
+ li>All students take the exam at the same time.</li>\n<li>You will get ful
+ l credit for a question if you answer the question correctly and completel
+ y.</li>\n<li>Answer all questions before submitting this quiz.</li>\n</ul>
+ \n</li>\n</ul>\n</li>\n</ul><script src="https://instructure-uploads.s3.us
+ -east-1.amazonaws.com/account_10510000000000082/attachments/42217273/fgcu.
+ instructure.com-global-javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250218T170700Z
+UID:event-assignment-6169551
+DTSTART;VALUE=DATE;VALUE=DATE:20250211
+CLASS:PUBLIC
+DESCRIPTION:Instructions: [CEN3073-Assignment#1.docx] (https://fgcu.instruc
+ ture.com/courses/556273/files/53720267?wrap=1)\n\nExtended to Feb 11\, 202
+ 5\n\nGeneral Feedback (Feb 18\, 2025) : [CEN3073_Intro-lec9.ppt] (https://
+ fgcu.instructure.com/courses/556273/files/53894352?wrap=1)\n\nSpecific Fee
+ dback is given on Canvas\, embedded in the graded document.
+SEQUENCE:0
+SUMMARY:Assignment#1 [CEN 3073 - CRN 10416 - TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _556273&month=02&year=2025#assignment_6169551
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p>Instructio
+ ns: <a class="instructure_file_link instructure_scribd_file inline_disable
+ d" title="CEN3073-Assignment#1.docx" href="https://fgcu.instructure.com/co
+ urses/556273/files/53720267?wrap=1" target="_blank" data-canvas-previewabl
+ e="false" data-api-endpoint="https://fgcu.instructure.com/api/v1/courses/5
+ 56273/files/53720267" data-api-returntype="File">CEN3073-Assignment#1.docx
+ </a></p>\n<p>Extended to Feb 11\, 2025</p>\n<p>General Feedback (Feb 18\, 
+ 2025) : <a class="instructure_file_link instructure_scribd_file inline_dis
+ abled" title="CEN3073_Intro-lec9.ppt" href="https://fgcu.instructure.com/c
+ ourses/556273/files/53894352?wrap=1" target="_blank" data-canvas-previewab
+ le="false" data-api-endpoint="https://fgcu.instructure.com/api/v1/courses/
+ 556273/files/53894352" data-api-returntype="File">CEN3073_Intro-lec9.ppt</
+ a></p>\n<p>Specific Feedback is given on Canvas\, embedded in the graded d
+ ocument.</p><script src="https://instructure-uploads.s3.us-east-1.amazonaw
+ s.com/account_10510000000000082/attachments/42217273/fgcu.instructure.com-
+ global-javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250213T213000Z
+UID:event-assignment-6172845
+DTSTART:20250213T211500Z
+DTEND:20250213T211500Z
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Test-1 Software Testing CEN 4072 [CEN 4072 - CRN 10420 - TR - 20250
+ 1]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555700&month=02&year=2025#assignment_6172845
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250219T172800Z
+UID:event-assignment-6147134
+DTSTART;VALUE=DATE;VALUE=DATE:20250213
+CLASS:PUBLIC
+DESCRIPTION:Attached is the PDF file that contains seven assignment questio
+ ns. \n\nFor Question 1 only\, submit a Word or PDF file. For remaining qu
+ estions\, submit properly formatted queries in an SQL file. Name both of y
+ our files First and Last name and Assignment 1. For example: Vinod-Ahuja-A
+ ssignment-1.pdf and Vinod-Ahuja-Assignment-1.sql\n\n \n\n[Assignment 1.pd
+ f] (https://fgcu.instructure.com/courses/559165/files/53802793?wrap=1)\n\n
+  \n\n 
+SEQUENCE:0
+SUMMARY:Assignment 1 [COP 3710 - CRN 14033 - TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _559165&month=02&year=2025#assignment_6147134
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p>Attached i
+ s the PDF file that contains seven assignment questions.&nbsp\;</p>\n<p>Fo
+ r Question 1 only\, submit a Word or PDF file. For remaining questions\, s
+ ubmit properly formatted queries in an SQL file. Name both of your files F
+ irst and Last name and Assignment 1. For example: Vinod-Ahuja-Assignment-1
+ .pdf and Vinod-Ahuja-Assignment-1.sql</p>\n<p>&nbsp\;</p>\n<p><a class="in
+ structure_file_link instructure_scribd_file inline_disabled" title="Assign
+ ment 1.pdf" href="https://fgcu.instructure.com/courses/559165/files/538027
+ 93?wrap=1" target="_blank" data-canvas-previewable="false" data-api-endpoi
+ nt="https://fgcu.instructure.com/api/v1/courses/559165/files/53802793" dat
+ a-api-returntype="File">Assignment 1.pdf</a></p>\n<p>&nbsp\;</p>\n<p>&nbsp
+ \;</p><script src="https://instructure-uploads.s3.us-east-1.amazonaws.com/
+ account_10510000000000082/attachments/42217273/fgcu.instructure.com-global
+ -javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250214T180900Z
+UID:event-assignment-6157734
+DTSTART;VALUE=DATE;VALUE=DATE:20250217
+CLASS:PUBLIC
+DESCRIPTION:The quiz is based on:\n\n* See the spam classification code not
+ ebook (LAST in  Page [1 - Dr K notebooks 2025] (https://fgcu.instructure.
+ com/courses/555851/pages/1-dr-k-notebooks-2025)) -- good to have the noteb
+ ook OPEN as the questions will ask you about specific code and variables e
+ tc.\n\n* material for Naive Bayes (see Files and Pages for material and ex
+ amples).\n\n* Focus on terminology and how to calculate a prior probabilit
+ y / a conditional probability.\n\n* Reminder that all the NB work we do in
+  this course is with discrete data e.g. integers or categories\, so please
+  ignore any material on continuous variables (that is\, those that have fl
+ oating point values)\n\nYou could have all material open but it is strongl
+ y recommended to review all material before taking the quiz.
+SEQUENCE:0
+SUMMARY:Q3 (Classification\, Naive Bayes) [CEN 4930 - CRN 14005 - F - 20250
+ 1]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555851&month=02&year=2025#assignment_6157734
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p>The quiz i
+ s based on:</p>\n<ul>\n<li>See the spam classification code notebook (LAST
+  in&nbsp\; Page <a title="1 - Dr K notebooks 2025" href="https://fgcu.inst
+ ructure.com/courses/555851/pages/1-dr-k-notebooks-2025" data-course-type="
+ wikiPages" data-published="true" data-api-endpoint="https://fgcu.instructu
+ re.com/api/v1/courses/555851/pages/1-dr-k-notebooks-2025" data-api-returnt
+ ype="Page">1 - Dr K notebooks 2025</a>) -- good to have the notebook OPEN 
+ as the questions will ask you about specific code and variables etc.</li>\
+ n<li>material for Naive Bayes (see Files and Pages for material and exampl
+ es).\n<ul>\n<li>Focus on terminology and how to calculate a prior probabil
+ ity / a conditional probability.</li>\n<li>Reminder that all the NB work w
+ e do in this course is with discrete data e.g. integers or categories\, so
+  please ignore any material on continuous variables (that is\, those that 
+ have floating point values)</li>\n</ul>\n</li>\n</ul>\n<p><strong>You coul
+ d have all material open but it is strongly recommended to review all mate
+ rial <span style="text-decoration: underline\;">before</span> taking the q
+ uiz.</strong></p><script src="https://instructure-uploads.s3.us-east-1.ama
+ zonaws.com/account_10510000000000082/attachments/42217273/fgcu.instructure
+ .com-global-javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250220T142200Z
+UID:event-assignment-6157749
+DTSTART;VALUE=DATE;VALUE=DATE:20250219
+CLASS:PUBLIC
+DESCRIPTION:See [* Project 1] (https://fgcu.instructure.com/courses/555851/
+ pages/star-project-1)\n\nYou must follow the instructions here and the Pro
+ ject1 Page(s) with the specific datasets\, please do not do something else
+  and expect points.\n\nThe general goal is to train 2 different classifier
+  models in scikit-learn for each dataset given in the related Page (for ex
+ ample\, fit one model on the train set of the triage data and test it on d
+ ev set of the triage data).\n\nYour starting point should be the spam clas
+ sification notebook in Page "Dr K notebooks 2025" in Canvas Pages.\n\nMake
+  sure to follow only what you need for this assignment and change the code
+  accordingly for *each* dataset.\n\n* One of the classifiers can be the mu
+ ltinomial NB (as in the spam notebook). Then you have to find and use anot
+ her model (NOT another NB\, find other models in the scikit-learn models\,
+  e.g. SVC or decision tree or neural network or ...).\n\n* You must experi
+ ment with 1) a count vectorizer and then 2) a tfidf vectorizer.\n\n* You m
+ ust report accuracy\, precision\, and recall for each run.\n\n* For the da
+ ta\, some small manipulations outside of code are ok\, if you describe it 
+ in your report and your code. For example\, they use the | separator for t
+ he "text | label"\, so look up pandas read csv with different separators (
+ default is comma). There are apparently issues with missing data which you
+  could fix in code or open and fix in MS Excel.\n\n* In general\, the code
+  is a good part of this\, but a big part is the set up of the experiments\
+ , the quality of the report\, etc.\n\n*What to submit*\n\nA pdf that inclu
+ des:\n\n* The names of all group members\n\n* Your link to your google col
+ ab notebook inside the PDF -- Make sure the link is OPEN to ANYONE to view
+  the notebook.\n\n* The link must be inside the PDF with the names\, not i
+ n the comments on Canvas.\n\n* Make sure that your code (notebook) has Sec
+ tions and some comments so that I am able to go through it without too muc
+ h effort.\n\n* I need to see the outputs of each cells in the notebook. Ha
+ ving just 1-2 cells is an issues\, follow the examples I provided for how 
+ to structure cells.\n\n* Functions\, object-oriented etc. are not part of 
+ this\, so follow the examples I provided for the script.\n\n* For EACH dat
+ aset\, a table with all the related results from your runs using the follo
+ wing template:\n\n[table results-1.png] (https://fgcu.instructure.com/cour
+ ses/555851/files/53593976/preview)\n\n4. A short paragraph (about 150 word
+ s\, overly verbose answers might lose points\, it is a talent to briefly a
+ nd succinctly convey your thoughts!) with a summary / conclusions\, e.g. w
+ hat is the best result for each case\, what did you observe etc. Imagine s
+ omeone just reading this paragraph to see what has been done for this data
+  so they can run their own experiments or compare to your results.\n\n*\n\
+ n* Any use of GenAI generated text\, or generic filler text that looks lik
+ e it came from such as source and adds no actual value to your answer or u
+ nderstanding of the data or results will result in a "0" grade for the sub
+ mission. Please write your own answers\, summaries etc.\n\n* Since you hav
+ e 2 classification models and 2 vectorizers in #3 for each dataset\, you h
+ ave a total of 2x2=4\, *from which* to pick the best result for each datas
+ et.\n\n* For the "best" result in each dataset\, also show the confusion m
+ atrix in your answer for part #4.\n\n* How you pick the best result (e.g. 
+ based only on accuracy or looking at the confusion matrix or ...) is up to
+  you if the numbers are not clearly the best for one of the results. You m
+ ust * explain your thinking and clearly say which model+vectorizer combo w
+ on and why *.\n\n* Whenever you are presenting a lot of numbers it should 
+ be in tabular format with appropriate header rows/titles\, or you may use 
+ bullets etc. The reader should not have to read and find/compare different
+  numbers in a long text paragraph. Of course\, if you are simply mentionin
+ g one or two numerical results referring to the table in #3\, that is fine
+ .\n\n 
+SEQUENCE:0
+SUMMARY:Project1 final sub [CEN 4930 - CRN 14005 - F - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555851&month=02&year=2025#assignment_6157749
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p><strong><s
+ pan style="background-color: #bfedd2\;">See <a title="* Project 1" href="h
+ ttps://fgcu.instructure.com/courses/555851/pages/star-project-1" data-cour
+ se-type="wikiPages" data-published="true" data-api-endpoint="https://fgcu.
+ instructure.com/api/v1/courses/555851/pages/star-project-1" data-api-retur
+ ntype="Page">* Project 1</a></span></strong></p>\n<p><strong><span style="
+ background-color: #bfedd2\;">You must follow the instructions here and the
+  Project1 Page(s) with the specific datasets\, please do not do something 
+ else and expect points.</span><br></strong></p>\n<p><strong>The general go
+ al is to train 2 different classifier models in scikit-learn for each data
+ set given in the related Page </strong>(for example\, fit one model on the
+  train set of the triage data and test it on dev set of the triage data).<
+ /p>\n<p><span style="text-decoration: underline\;">Your starting point sho
+ uld be the spam classification notebook in Page <strong>"Dr K notebooks 20
+ 25" in Canvas Pages</strong>. </span></p>\n<p><span style="text-decoration
+ : underline\;">Make sure to follow only what you need for this assignment 
+ and change the code accordingly for *each* dataset.</span></p>\n<ul>\n<li>
+ One of the classifiers can be the multinomial NB (as in the spam notebook)
+ . Then you have to find and use another model (NOT another NB\, find other
+  models in the scikit-learn models\, e.g. SVC or decision tree or neural n
+ etwork or ...).</li>\n<li>You must experiment with 1) a count vectorizer a
+ nd then 2) a tfidf vectorizer.</li>\n<li>You must report accuracy\, precis
+ ion\, and recall for each run.</li>\n<li>For the data\, some small manipul
+ ations outside of code are ok\, if you describe it in your report and your
+  code. For example\, they use the | separator for the "text | label"\, so 
+ look up pandas read csv with different separators (default is comma). Ther
+ e are apparently issues with missing data which you could fix in code or o
+ pen and fix in MS Excel.</li>\n<li>In general\, the code is a good part of
+  this\, but a big part is the set up of the experiments\, the quality of t
+ he report\, etc.</li>\n</ul>\n<p><strong>*What to submit* </strong></p>\n<
+ p><strong>A pdf that includes: </strong></p>\n<ol style="list-style-type: 
+ decimal\;">\n<li><strong>The names of all group members </strong></li>\n<l
+ i><strong>Your link to your google colab notebook inside the PDF -- Make s
+ ure the link is OPEN to ANYONE to view the notebook. </strong>\n<ul style=
+ "list-style-type: square\;">\n<li>The link must be inside the PDF with the
+  names\, not in the comments on Canvas.</li>\n<li>Make sure that your code
+  (notebook) has Sections and some comments so that I am able to go through
+  it without too much effort.</li>\n<li>I need to see the outputs of each c
+ ells in the notebook. Having just 1-2 cells is an issues\, follow the exam
+ ples I provided for how to structure cells.</li>\n<li>Functions\, object-o
+ riented etc. are not part of this\, so follow the examples I provided for 
+ the script.</li>\n</ul>\n</li>\n<li>For EACH <strong>dataset</strong>\, a 
+ <strong>table </strong>with all the related <strong>results </strong>from 
+ your runs using the following template:</li>\n</ol>\n<p style="padding-lef
+ t: 40px\;"><img id="53593976" src="https://fgcu.instructure.com/courses/55
+ 5851/files/53593976/preview" alt="table results-1.png" data-api-endpoint="
+ https://fgcu.instructure.com/api/v1/courses/555851/files/53593976" data-ap
+ i-returntype="File" loading="lazy"></p>\n<p>4. A short paragraph (about 15
+ 0 words\, overly verbose answers might lose points\, it is a talent to bri
+ efly and succinctly convey your thoughts!) with a <strong>summary / conclu
+ sions</strong>\, e.g. what is the best result for each case\, what did you
+  observe etc. Imagine someone just reading this paragraph to see what has 
+ been done for this data so they can run their own experiments or compare t
+ o your results.</p>\n<ol>\n<li style="list-style-type: none\;">\n<ol style
+ ="list-style-type: upper-alpha\;">\n<li>Any use of GenAI generated text\, 
+ or generic filler text that looks like it came from such as source and add
+ s no actual value to your answer or understanding of the data or results w
+ ill result in a "0" grade for the submission. Please write your own answer
+ s\, summaries etc.</li>\n<li>Since you have 2 classification <strong>model
+ s </strong>and 2 <strong>vectorizers </strong>in #3 for each <strong>datas
+ et</strong>\, you have a total of 2x2=4\, *from which* to pick the best re
+ sult for each dataset.</li>\n<li>For the "best" result in each dataset\, a
+ lso show the <strong>confusion matrix</strong> in your answer for part #4.
+ </li>\n<li><strong>How </strong>you pick the best result (e.g. based only 
+ on accuracy or looking at the confusion matrix or ...) is up to you if the
+  numbers are not clearly the best for one of the results. You must * expla
+ in your thinking and clearly say which model+vectorizer combo won and why 
+ *.</li>\n<li>Whenever you are presenting a lot of numbers it should be in 
+ <strong>tabular </strong>format with appropriate header rows/titles\, or y
+ ou may use <strong>bullets </strong>etc. The reader should not have to rea
+ d and find/compare different numbers in a long text paragraph. Of course\,
+  if you are simply mentioning one or two numerical results referring to th
+ e table in #3\, that is fine.</li>\n</ol>\n</li>\n</ol>\n<p style="padding
+ -left: 40px\;">&nbsp\;</p><script src="https://instructure-uploads.s3.us-e
+ ast-1.amazonaws.com/account_10510000000000082/attachments/42217273/fgcu.in
+ structure.com-global-javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250220T140000Z
+UID:event-assignment-6147127
+DTSTART:20250220T151500Z
+DTEND:20250220T151500Z
+CLASS:PUBLIC
+DESCRIPTION:Note: For this exam we will be using University Database Schema
+ .\n\n \n\n 
+SEQUENCE:0
+SUMMARY:Exam 1- Requires Respondus LockDown Browser [COP 3710 - CRN 14033 -
+  TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _559165&month=02&year=2025#assignment_6147127
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p>Note: For 
+ this exam we will be using University Database Schema.</p>\n<p>&nbsp\;</p>
+ \n<p>&nbsp\;</p><script src="https://instructure-uploads.s3.us-east-1.amaz
+ onaws.com/account_10510000000000082/attachments/42217273/fgcu.instructure.
+ com-global-javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250220T140000Z
+UID:event-assignment-6176614
+DTSTART:20250220T151500Z
+DTEND:20250220T151500Z
+CLASS:PUBLIC
+DESCRIPTION:Upload your  Exam 1 file here.
+SEQUENCE:0
+SUMMARY:Upload Your Exam 1 [COP 3710 - CRN 14033 - TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _559165&month=02&year=2025#assignment_6176614
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p>Upload you
+ r&nbsp\; Exam 1 file here.</p><script src="https://instructure-uploads.s3.
+ us-east-1.amazonaws.com/account_10510000000000082/attachments/42217273/fgc
+ u.instructure.com-global-javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250220T212300Z
+UID:event-assignment-6177017
+DTSTART;VALUE=DATE;VALUE=DATE:20250224
+CLASS:PUBLIC
+DESCRIPTION:
+SEQUENCE:0
+SUMMARY:Java and Selenium Basics [CEN 4072 - CRN 10420 - TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555700&month=02&year=2025#assignment_6177017
+X-ALT-DESC;FMTTYPE=text/html:
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250220T140100Z
+UID:event-assignment-6176856
+DTSTART;VALUE=DATE;VALUE=DATE:20250224
+CLASS:PUBLIC
+DESCRIPTION:Please use this individual submission to summarize your work in
+  project1. Please be brief and clear\, keeping it up to 100-150 words max.
+ \n\nIn your write-up\, make sure to answer clearly:\n\n* your name and pro
+ ject1 group Number\n\n* which specific tasks and/or parts of the project c
+ ode\, report\, etc. did you specifically work on?\n\n* which part did you 
+ find challenging? which part did you find rewarding (meaning it helped you
+  better understand something or feel achievement)? what could you have don
+ e better?\n\n* other comments: please write briefly\, we can always discus
+ s more at zoom / my office. I welcome feedback\, constructive criticism\, 
+ ideas\, compliments\, kudos\, etc.
+SEQUENCE:0
+SUMMARY:Project1 Review (individual sub) [CEN 4930 - CRN 14005 - F - 202501
+ ]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555851&month=02&year=2025#assignment_6176856
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p><strong>Pl
+ ease use this individual submission to summarize your work in project1. Pl
+ ease be brief and clear\, keeping it up to 100-150 words max.</strong></p>
+ \n<p>In your write-up\, make sure to answer clearly:</p>\n<ol style="list-
+ style-type: decimal\;">\n<li><strong>your name and project1 group Number<b
+ r></strong></li>\n<li>which specific tasks and/or parts of the project cod
+ e\, report\, etc. did you specifically work on?</li>\n<li>which part did y
+ ou find challenging? which part did you find rewarding (meaning it helped 
+ you better understand something or feel achievement)? what could you have 
+ done better?</li>\n<li>other comments: please write briefly\, we can alway
+ s discuss more at zoom / my office. I welcome feedback\, constructive crit
+ icism\, ideas\, compliments\, kudos\, etc.</li>\n</ol><script src="https:/
+ /instructure-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/
+ attachments/42217273/fgcu.instructure.com-global-javascript-CLEAN.js"></sc
+ ript>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250218T210200Z
+UID:event-assignment-6176077
+DTSTART;VALUE=DATE;VALUE=DATE:20250227
+CLASS:PUBLIC
+DESCRIPTION:[Selenium Automation using different browsers-1.docx] (https://
+ fgcu.instructure.com/courses/555700/files/53897289?wrap=1)
+SEQUENCE:0
+SUMMARY:Selenium automation with different Browsers [CEN 4072 - CRN 10420 -
+  TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555700&month=02&year=2025#assignment_6176077
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p><a class="
+ instructure_file_link instructure_scribd_file inline_disabled" title="Sele
+ nium Automation using different browsers-1.docx" href="https://fgcu.instru
+ cture.com/courses/555700/files/53897289?wrap=1" target="_blank" data-canva
+ s-previewable="false" data-api-endpoint="https://fgcu.instructure.com/api/
+ v1/courses/555700/files/53897289" data-api-returntype="File">Selenium Auto
+ mation using different browsers-1.docx</a></p><script src="https://instruc
+ ture-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachme
+ nts/42217273/fgcu.instructure.com-global-javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250129T155900Z
+UID:event-calendar-event-1189642
+DTSTART;VALUE=DATE;VALUE=DATE:20250228
+CLASS:PUBLIC
+LOCATION:
+SEQUENCE:0
+SUMMARY:Exam1 (date now is set\, no make-ups scheduled except for documente
+ d emergency reasons) [CEN 4930 - CRN 14005 - F - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555851&month=02&year=2025#calendar_event_1189642
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250214T155600Z
+UID:event-assignment-6157739
+DTSTART;VALUE=DATE;VALUE=DATE:20250228
+CLASS:PUBLIC
+DESCRIPTION:In class. Exam review in class previous to the exam date. Be su
+ re to check announcements in class and on Canvas posted on the days before
+  Exam.\n\n 
+SEQUENCE:0
+SUMMARY:Exam1 [CEN 4930 - CRN 14005 - F - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555851&month=02&year=2025#assignment_6157739
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p>In class. 
+ Exam review in class previous to the exam date. Be sure to check announcem
+ ents in class and on Canvas posted on the days before Exam.</p>\n<p>&nbsp\
+ ;</p><script src="https://instructure-uploads.s3.us-east-1.amazonaws.com/a
+ ccount_10510000000000082/attachments/42217273/fgcu.instructure.com-global-
+ javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250203T204100Z
+UID:event-assignment-override-209479
+DTSTART;VALUE=DATE;VALUE=DATE:20250228
+CLASS:PUBLIC
+DESCRIPTION:As you know\, all SSS Scholars are required to complete a finan
+ cial literacy assignment once a year. Starting February 3rd\, Scholars wil
+ l need to complete one program of their choice through Suncoast's mPow
+ er eLearning Modules. These interactive courses are easy to use\, full of
+  information and completely free! The programs include Financial Foundati
+ ons\, Building Financial Capability\, Investing in Your Future\, & Small B
+ usiness Essentials.\n\nIf you are interested mPower eLearning Modules:\n\n
+ * Select one program listed on the [Suncoast Website (Links to an exte
+ rnal site.)Links to an external site.] (https://www.suncoastcreditunion.co
+ m/resources/mpower-elearning) and complete the entire course module (tak
+ es approx. 30 minutes)\n\n* Once you complete the course\, you will immedi
+ ately receive a certificate of completion which you will need to SAVE or
+  SCREEN SHOT in order to upload it here on Canvas.\n\n* The deadline
+  to complete this assignment is Friday\, February 28th. This is sponsored 
+ by Suncoast Credit Union.  Additional questions can be addressed by the 
+ Program Coordinator or the Project Director.\n\nIf you are interested in T
+ ext to Win:\n\n* Respond to the text messages that you receive daily\, by 
+ 11:59pm from Feb 10th-14th.\n\nThere will be a Financial Literacy Workshop
+  during TRIO Day on February 24th. \n\nStudents who complete all three Fi
+ nancial February activities will be awarded a prize. \n\n[Financial Febru
+ ary Flyer Spring 2025 (8.5 x 11 in)-1.pdf] (https://fgcu.instructure.com/c
+ ourses/405705/files/53796691?wrap=1)
+SEQUENCE:0
+SUMMARY:Financial Literacy Requirement 2025 (TRiO Student Support Services 
+ - Classic Program) [TRiO Student Support Services - Classic Program]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _403821&month=02&year=2025#assignment_6172143
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p>As you kno
+ w\, all SSS Scholars are required to complete a financial literacy assignm
+ ent once a year. Starting February 3rd\, Scholars will need to complete<sp
+ an>&nbsp\;</span><strong><em><span>one&nbsp\;</span></em>program of their 
+ choice</strong>&nbsp\;through&nbsp\;<i>Suncoast's mPower eLearning Modules
+ .&nbsp\;</i>These interactive courses are easy to use\, full of informatio
+ n and completely free! The programs include&nbsp\;<i>Financial Foundations
+ \, Building Financial Capability\, Investing in Your Future\, &amp\; Small
+  Business Essentials.</i></p>\n<p><span><strong>If you are interested mPow
+ er eLearning Modules:</strong></span></p>\n<ol>\n<li><span>Select one prog
+ ram listed on the </span><a class="fui-Link ___1rxvrpe f2hkw1w f3rmtva f
+ 1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fjoy568 figsok6 f1hu3pq6 f11qmgu
+ v f19f4twv f1tyq0we f1g0x7ka fhxju0i f1qch9an f1cnd47f fqv5qza f1vmzxwi f1
+ o700av f13mvf36 f1cmlufx f9n3di6 f1ids18y f1tx3yz7 f1deo86v f1eh06m1 f1ies
+ cvh fhgqx19 f1olyrje f1p93eir f1nev41a f1h8hb77 f1lqvz6u f10aw75t fsle3fq 
+ f17ae5zn external" title="https://www.suncoastcreditunion.com/resources/mp
+ ower-elearning" href="https://www.suncoastcreditunion.com/resources/mpower
+ -elearning" target="_blank" aria-label="Link Suncoast Website (Links to 
+ an external site.)"><span>Suncoast Website (Links to an external site.)<
+ /span><span class="external_link_icon" role="presentation"><span class="sc
+ reenreader-only">Links to an external site.</span></span></a><span> and 
+ complete the entire course module (takes approx. 30 minutes)</span></li>\n
+ <li><span>Once you complete the course\, you will immediately receive a ce
+ rtificate of completion which you will need to <strong>SAVE or SCREEN SH
+ OT</strong> in order to <strong>upload it</strong> here on Canvas.</
+ span></li>\n<li><strong>The deadline to complete this assignment is Friday
+ \, February 28th. This is sponsored by Suncoast Credit Union.&nbsp\;<span>
+ &nbsp\;</span></strong>Additional questions can be addressed by the Progra
+ m Coordinator or the Project Director.</li>\n</ol>\n<p><span><strong>If yo
+ u are interested in Text to Win:</strong></span></p>\n<ol>\n<li><span>Resp
+ ond to the text messages that you receive daily\, by 11:59pm from Feb 10th
+ -14th.</span></li>\n</ol>\n<p><strong>There will be a Financial Literacy W
+ orkshop during TRIO Day on February 24th.&nbsp\;</strong></p>\n<p><strong>
+ Students who complete all three Financial February activities will be awar
+ ded a prize.&nbsp\;</strong></p>\n<p><span class="instructure_file_holder 
+ link_holder instructure_file_link_holder"><a class="inline_disabled previe
+ w_in_overlay" title="Financial February Flyer Spring 2025 (8.5 x 11 in)-1.
+ pdf" href="https://fgcu.instructure.com/courses/405705/files/53796691?wrap
+ =1" target="_blank" data-canvas-previewable="false" data-id="53796691" dat
+ a-api-endpoint="https://fgcu.instructure.com/api/v1/courses/405705/files/5
+ 3796691" data-api-returntype="File">Financial February Flyer Spring 2025 (
+ 8.5 x 11 in)-1.pdf</a></span></p><script src="https://instructure-uploads.
+ s3.us-east-1.amazonaws.com/account_10510000000000082/attachments/42217273/
+ fgcu.instructure.com-global-javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250220T181400Z
+UID:event-assignment-6176679
+DTSTART;VALUE=DATE;VALUE=DATE:20250311
+CLASS:PUBLIC
+DESCRIPTION:Instructions:[CEN3073-Assignment#2-2.docx] (https://fgcu.instru
+ cture.com/courses/556273/files/53910502?wrap=1)\n\n 
+SEQUENCE:0
+SUMMARY:Assignment#2 - Writing/Defining Requirements + Traceability Matrix 
+ [CEN 3073 - CRN 10416 - TR - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _556273&month=03&year=2025#assignment_6176679
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p>Instructio
+ ns:<span><a class="instructure_file_link instructure_scribd_file inline_di
+ sabled" title="CEN3073-Assignment#2-2.docx" href="https://fgcu.instructure
+ .com/courses/556273/files/53910502?wrap=1" target="_blank" data-canvas-pre
+ viewable="false" data-api-endpoint="https://fgcu.instructure.com/api/v1/co
+ urses/556273/files/53910502" data-api-returntype="File">CEN3073-Assignment
+ #2-2.docx</a></span></p>\n<p>&nbsp\;</p><script src="https://instructure-u
+ ploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachments/42
+ 217273/fgcu.instructure.com-global-javascript-CLEAN.js"></script>
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20250109T171300Z
+UID:event-assignment-6164439
+DTSTART;VALUE=DATE;VALUE=DATE:20250428
+CLASS:PUBLIC
+DESCRIPTION:This will be graded at the end of the semester to reflect atten
+ dance and participation efforts throughout the semester.\n\n* What is "goo
+ d" attendance??  ----> Please see policies on the syllabus.\n\n* Examples
+ : Coming to class more than 10 min late\, or constantly being on your phon
+ e\, or talking to classmates in a way that disrupts the class or similar w
+ ill affect the grade.\n\nIf you maintain good attendance throughout the se
+ mester\, you will earn 70-80% of this grade (specific points will be deter
+ mined and shared later in the semester).\n\nThe remaining points are award
+ ed for active participation in class\, which includes\, but is not limited
+  to: responding to instructor questions\, asking thoughtful questions\, an
+ d engaging in group discussions in a manner that demonstrates your prepare
+ dness\, interest\, and enthusiasm for the course material.\n\nSimply askin
+ g questions about grades or vague inquiries related to graded material (e.
+ g.\, "Why is my answer incorrect?" or "Why was X points deducted?") withou
+ t showing evidence of preparation or a solid understanding of the material
+  is considered self-driven and does not contribute to full participation.\
+ n\n 
+SEQUENCE:0
+SUMMARY:Attendance and Participation (points TBA) [CEN 4930 - CRN 14005 - F
+  - 202501]
+URL;VALUE=URI:https://fgcu.instructure.com/calendar?include_contexts=course
+ _555851&month=04&year=2025#assignment_6164439
+X-ALT-DESC;FMTTYPE=text/html:<link rel="stylesheet" href="https://instructu
+ re-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachment
+ s/42217272/fgcu.instructure.com-global-stylesheet-CLEAN.css"><p>This will 
+ be graded at the end of the semester to reflect attendance and participati
+ on efforts throughout the semester. </p>\n<ul>\n<li>What is "good" attenda
+ nce??&nbsp\; ----&gt\; Please see policies on the syllabus. </li>\n<li>Exa
+ mples: Coming to class more than 10 min late\, or constantly being on your
+  phone\, or talking to classmates in a way that disrupts the class or simi
+ lar will affect the grade.</li>\n</ul>\n<p>If you maintain good attendance
+  throughout the semester\, you will earn 70-80% of this grade (specific po
+ ints will be determined and shared later in the semester).</p>\n<p>The rem
+ aining points are awarded for active participation in class\, which includ
+ es\, but is not limited to: responding to instructor questions\, asking th
+ oughtful questions\, and engaging in group discussions in a manner that de
+ monstrates your preparedness\, interest\, and enthusiasm for the course ma
+ terial.</p>\n<p>Simply asking questions about grades or vague inquiries re
+ lated to graded material (e.g.\, "Why is my answer incorrect?" or "Why was
+  X points deducted?") without showing evidence of preparation or a solid u
+ nderstanding of the material is considered self-driven and does not contri
+ bute to full participation.</p>\n<p>&nbsp\;</p><script src="https://instru
+ cture-uploads.s3.us-east-1.amazonaws.com/account_10510000000000082/attachm
+ ents/42217273/fgcu.instructure.com-global-javascript-CLEAN.js"></script>
+END:VEVENT
+END:VCALENDAR
