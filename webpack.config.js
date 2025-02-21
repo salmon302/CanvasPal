@@ -4,8 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
 	entry: {
 		background: './src/background/index.ts',
-		popup: './src/popup/index.ts',
-		contentScript: './src/contentScript/index.ts'
+		popup: './src/popup/index.ts'
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
@@ -14,14 +13,14 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.tsx?$/,
+				test: /\.ts$/,
 				use: 'ts-loader',
 				exclude: /node_modules/
 			}
 		]
 	},
 	resolve: {
-		extensions: ['.tsx', '.ts', '.js'],
+		extensions: ['.ts', '.js'],
 		alias: {
 			'@': path.resolve(__dirname, 'src')
 		}
@@ -34,12 +33,16 @@ module.exports = {
 					to: 'popup/popup.html'
 				},
 				{ 
-					from: 'src/popup/styles/popup.css',
-					to: 'popup/styles/popup.css'
+					from: 'src/popup/styles',
+					to: 'popup/styles'
 				},
 				{ 
 					from: 'manifest.json',
 					to: 'manifest.json'
+				},
+				{
+					from: 'icons',
+					to: 'icons'
 				}
 			]
 		})

@@ -1,5 +1,7 @@
 import ICAL from 'ical.js';
 import { GradeData } from "../contentScript";
+import { fetchCalendarData } from '../utils/calendar';
+import { calculatePriorities } from '../utils/priorities';
 
 export interface ICalEvent {
     title: string;
@@ -178,3 +180,33 @@ export class BackgroundService {
 }
 
 export const backgroundService = new BackgroundService();
+
+chrome.runtime.onInstalled.addListener(() => {
+  // Initialize default settings
+  chrome.storage.local.set({
+    calendarUrl: '',
+    priorities: {
+      dueDate: 0.4,
+      gradeWeight: 0.3,
+      gradeImpact: 0.3
+    }
+  });
+});
+
+// Set up periodic sync
+chrome.alarms.create('sync', { periodInMinutes: 30 });
+
+chrome.alarms.onAlarm.addListener(async (alarm) => {
+  if (alarm.name === 'sync') {
+    try {
+      const { calendarUrl } = await chrome.storage.local.get('calendarUrl');
+      if (calendarUrl) {
+        const assignments = await fetchCalendarData(calendarUrl);
+        const prioritizedAssignments = calculatePriorities(assignments);
+        await chrome.storage.local.set({ assignments: prioritizedAssignments });
+      }
+    } catch (error) {
+      console.error('Sync failed:', error);
+    }
+  }
+});

@@ -12,7 +12,8 @@
 		"prettier:check": "prettier --check 'src/**/*.{js,ts,json}'",
 		"prettier:write": "prettier --write 'src/**/*.{js,ts,json}'",
 		"type-check": "tsc --noEmit",
-		"package": "node scripts/package.js"
+		"package": "node scripts/package.js",
+		"build:prod": "webpack --mode production"
 	},
 	"keywords": [
 		"canvas",
