@@ -1,155 +1,169 @@
 import { PopupManager } from '../../src/popup';
 import { chrome } from 'jest-chrome';
+import { StorageData } from '../../src/types/chrome';
 
 describe('PopupManager', () => {
-	let mockDocument: Document;
+    let manager: PopupManager;
 
-	beforeEach(() => {
-		mockDocument = document.implementation.createHTMLDocument();
-		global.document = mockDocument;
+    // Helper function to initialize DOM and manager
+    const setupDOMAndManager = async () => {
+        // Setup DOM first
+        document.body.innerHTML = `
+            <div class="popup-container">
+                <div class="url-input">
+                    <input type="url" id="ical-url" value="">
+                    <button id="sync-button">Sync</button>
+                </div>
+                <div class="weight-controls">
+                    <input type="range" id="due-date-weight" value="33">
+                    <input type="range" id="grade-weight" value="33">
+                    <input type="range" id="impact-weight" value="34">
+                </div>
+                <div id="assignments-list"></div>
+                <div id="sync-status"></div>
+                <div id="error-message"></div>
+            </div>
+        `;
 
-		const container = mockDocument.createElement('div');
-		container.innerHTML = `
-			<div class="url-input">
-				<input type="url" id="ical-url">
-				<button id="sync-button" title="Sync now">Sync</button>
-			</div>
-			<input type="range" id="due-date-weight" value="33">
-			<input type="range" id="grade-weight" value="33">
-			<input type="range" id="impact-weight" value="34">
-			<div id="assignments-list"></div>
-			<div id="sync-status"></div>
-			<div id="error-message"></div>
-		`;
-		mockDocument.body.appendChild(container);
+        // Wait for DOM
+        await new Promise(resolve => requestAnimationFrame(resolve));
 
-		chrome.storage.sync.clear();
-		chrome.storage.local.clear();
-	});
+        // Setup storage mock
+        (chrome.storage.sync.get as jest.Mock).mockResolvedValue({
+            icalUrl: '',
+            weights: { dueDate: 33, gradeWeight: 33, impact: 34 }
+        });
 
-	describe('Initialization', () => {
-		it('should load saved settings on startup', async () => {
-			const savedSettings = {
-				icalUrl: 'https://example.com/calendar.ics',
-				weights: {
-					dueDate: 40,
-					gradeWeight: 30,
-					impact: 30
-				}
-			};
+        await new Promise(resolve => setTimeout(resolve, 0));
+        const popup = new PopupManager();
+        await new Promise(resolve => setTimeout(resolve, 0));
+        return popup;
+    };
 
-			chrome.storage.sync.get.mockImplementation(() => Promise.resolve(savedSettings));
+    beforeEach(async () => {
+        jest.useFakeTimers();
+        manager = await setupDOMAndManager();
+        jest.runAllTimers();
+    });
 
-			new PopupManager();
-			await Promise.resolve();
+    // Update test cases to always use setupDOMAndManager
+    describe('Initialization', () => {
+        it('should load saved settings on startup', async () => {
+            const savedSettings: Partial<StorageData> = {
+                icalUrl: 'https://example.com/calendar.ics',
+                weights: { dueDate: 40, gradeWeight: 30, impact: 30 }
+            };
 
-			const urlInput = document.getElementById('ical-url') as HTMLInputElement;
-			const dueDateWeight = document.getElementById('due-date-weight') as HTMLInputElement;
+            (chrome.storage.sync.get as jest.Mock).mockResolvedValue(savedSettings);
+            
+            // Create new instance with new settings
+            manager = await setupDOMAndManager();
+            await new Promise(resolve => setTimeout(resolve, 0));
 
-			expect(urlInput.value).toBe(savedSettings.icalUrl);
-			expect(dueDateWeight.value).toBe('40');
-		});
+            const urlInput = document.getElementById('ical-url') as HTMLInputElement;
+            expect(urlInput.value).toBe(savedSettings.icalUrl);
+        });
 
-		it('should fetch assignments on startup', async () => {
-			const mockAssignments = [{
-				title: 'Test Assignment',
-				dueDate: new Date(),
-				courseId: 'COURSE101',
-				completed: false
-			}];
+        it('should fetch assignments on startup', async () => {
+            const mockAssignments = [{
+                title: 'Test Assignment',
+                dueDate: new Date(),
+                courseId: 'COURSE101',
+                completed: false
+            }];
 
-			chrome.runtime.sendMessage.mockImplementation(() => Promise.resolve(mockAssignments));
+            chrome.runtime.sendMessage.mockImplementation(() => Promise.resolve(mockAssignments));
 
-			new PopupManager();
-			await Promise.resolve();
+            new PopupManager();
+            await Promise.resolve();
 
-			const assignmentsList = document.getElementById('assignments-list');
-			expect(assignmentsList?.innerHTML).toContain('Test Assignment');
-		});
-	});
+            const assignmentsList = document.getElementById('assignments-list');
+            expect(assignmentsList?.innerHTML).toContain('Test Assignment');
+        });
+    });
 
-	describe('User Interactions', () => {
-		it('should save iCal URL when changed', async () => {
-			new PopupManager();
-			const urlInput = document.getElementById('ical-url') as HTMLInputElement;
-			
-			urlInput.value = 'https://example.com/new-calendar.ics';
-			urlInput.dispatchEvent(new Event('change'));
+    describe('User Interactions', () => {
+        it('should save iCal URL when changed', async () => {
+            manager = await setupDOMAndManager();
+            const urlInput = document.getElementById('ical-url') as HTMLInputElement;
+            urlInput.value = 'https://example.com/new-calendar.ics';
+            urlInput.dispatchEvent(new Event('change'));
 
-			expect(chrome.storage.sync.set).toHaveBeenCalledWith({
-				icalUrl: 'https://example.com/new-calendar.ics'
-			});
-		});
+            expect(chrome.storage.sync.set).toHaveBeenCalledWith({
+                icalUrl: 'https://example.com/new-calendar.ics'
+            });
+        });
 
-		it('should update weights when sliders change', async () => {
-			new PopupManager();
-			const weightInput = document.getElementById('due-date-weight') as HTMLInputElement;
-			
-			weightInput.value = '50';
-			weightInput.dispatchEvent(new Event('input'));
+        it('should update weights when sliders change', async () => {
+            const popup = await setupDOMAndManager();
+            const weightInput = document.getElementById('due-date-weight') as HTMLInputElement;
+            
+            weightInput.value = '50';
+            weightInput.dispatchEvent(new Event('input'));
 
-			expect(chrome.storage.sync.set).toHaveBeenCalledWith({
-				weights: expect.objectContaining({
-					dueDate: 50
-				})
-			});
-		});
+            expect(chrome.storage.sync.set).toHaveBeenCalledWith({
+                weights: expect.objectContaining({
+                    dueDate: 50
+                })
+            });
+        });
 
-		it('should handle manual sync button click', async () => {
-			new PopupManager();
-			const syncButton = document.getElementById('sync-button') as HTMLButtonElement;
-			
-			syncButton.click();
+        it('should handle manual sync button click', async () => {
+            const popup = await setupDOMAndManager();
+            const syncButton = document.getElementById('sync-button') as HTMLButtonElement;
+            
+            syncButton.click();
 
-			expect(chrome.runtime.sendMessage).toHaveBeenCalledWith({
-				type: 'forceSync'
-			});
-		});
+            expect(chrome.runtime.sendMessage).toHaveBeenCalledWith({
+                type: 'forceSync'
+            });
+        });
 
-		it('should toggle assignment completion status', async () => {
-			const mockAssignments = [{
-				title: 'Test Assignment',
-				dueDate: new Date(),
-				courseId: 'COURSE101',
-				completed: false
-			}];
+        it('should toggle assignment completion status', async () => {
+            const mockAssignments = [{
+                title: 'Test Assignment',
+                dueDate: new Date(),
+                courseId: 'COURSE101',
+                completed: false
+            }];
 
-			chrome.runtime.sendMessage.mockImplementation(() => Promise.resolve(mockAssignments));
+            chrome.runtime.sendMessage.mockImplementation(() => Promise.resolve(mockAssignments));
 
-			new PopupManager();
-			await Promise.resolve();
+            new PopupManager();
+            await Promise.resolve();
 
-			const checkbox = document.querySelector('.completion-toggle input') as HTMLInputElement;
-			checkbox.click();
+            const checkbox = document.querySelector('.completion-toggle input') as HTMLInputElement;
+            checkbox.click();
 
-			expect(chrome.storage.local.set).toHaveBeenCalledWith({
-				'assignment_Test Assignment': true
-			});
-		});
-	});
+            expect(chrome.storage.local.set).toHaveBeenCalledWith({
+                'assignment_Test Assignment': true
+            });
+        });
+    });
 
-	describe('Error Handling', () => {
-		it('should display error messages', async () => {
-			chrome.runtime.sendMessage.mockImplementation(() => Promise.reject('Network error'));
+    describe('Error Handling', () => {
+        it('should display error messages', async () => {
+            chrome.runtime.sendMessage.mockImplementation(() => Promise.reject('Network error'));
 
-			new PopupManager();
-			await Promise.resolve();
+            new PopupManager();
+            await Promise.resolve();
 
-			const errorMessage = document.getElementById('error-message');
-			expect(errorMessage?.textContent).toContain('Failed to fetch assignments');
-		});
+            const errorMessage = document.getElementById('error-message');
+            expect(errorMessage?.textContent).toContain('Failed to fetch assignments');
+        });
 
-		it('should show sync status updates', async () => {
-			new PopupManager();
-			const status = document.getElementById('sync-status');
-			const now = Date.now();
+        it('should show sync status updates', async () => {
+            new PopupManager();
+            const status = document.getElementById('sync-status');
+            const now = Date.now();
 
-			chrome.runtime.onMessage.addListener.mock.calls[0][0]({
-				type: 'syncComplete',
-				timestamp: now
-			});
+            const messageListener = (chrome.runtime.onMessage.addListener as jest.Mock).mock.calls[0][0];
+            messageListener({
+                type: 'syncComplete',
+                timestamp: now
+            });
 
-			expect(status?.textContent).toContain('Last synced');
-		});
-	});
+            expect(status?.textContent).toContain('Last synced');
+        });
+    });
 });
