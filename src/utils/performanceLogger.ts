@@ -1,27 +1,35 @@
 import { Logger } from './logger';
 
-interface PerformanceLog {
+export type TrendType = 'improving' | 'degrading' | 'stable';
+
+export interface PerformanceMetric {
+    operation: string;
+    duration: number;
     timestamp: number;
-    metrics: {
-        name: string;
-        duration: number;
-        metadata?: Record<string, any>;
-    }[];
-    summary: {
-        totalDuration: number;
-        averageDuration: number;
-        slowestOperation: string;
-        fastestOperation: string;
-    };
+}
+
+export interface PerformanceLog {
+    metrics: PerformanceMetric[];
+    timestamp: number;
+}
+
+interface PerformanceTrend {
+    operation: string;
+    averageDuration: number;
+    trend: TrendType;
+    percentageChange: number;
 }
 
 export class PerformanceLogger {
     private logger: Logger;
     private static readonly MAX_LOGS = 100;
     private static readonly STORAGE_KEY = 'performanceLogs';
+    private static readonly TREND_THRESHOLD = 5; // 5% change threshold
+    private metrics: Map<string, PerformanceMetric[]>;
 
     constructor() {
-        this.logger = new Logger('PerformanceLogger');
+        this.logger = Logger.createLogger('PerformanceLogger');
+        this.metrics = new Map();
     }
 
     public async logPerformance(metrics: PerformanceLog): Promise<void> {
@@ -78,10 +86,10 @@ export class PerformanceLogger {
         const operationMetrics: Record<string, number[]> = {};
         logs.forEach(log => {
             log.metrics.forEach(metric => {
-                if (!operationMetrics[metric.name]) {
-                    operationMetrics[metric.name] = [];
+                if (!operationMetrics[metric.operation]) {
+                    operationMetrics[metric.operation] = [];
                 }
-                operationMetrics[metric.name].push(metric.duration);
+                operationMetrics[metric.operation].push(metric.duration);
             });
         });
 
@@ -94,11 +102,13 @@ export class PerformanceLogger {
             const olderAvg = this.calculateAverage(older);
             const percentageChange = ((recentAvg - olderAvg) / olderAvg) * 100;
 
+            const trend: TrendType = percentageChange < -5 ? 'improving' :
+                                     percentageChange > 5 ? 'degrading' : 'stable';
+
             return {
                 operation,
                 averageDuration: recentAvg,
-                trend: percentageChange < -5 ? 'improving' :
-                       percentageChange > 5 ? 'degrading' : 'stable',
+                trend,
                 percentageChange
             };
         });
@@ -124,7 +134,7 @@ export class PerformanceLogger {
     }
 
     private generateRecommendations(
-        trends: { operation: string; trend: string; percentageChange: number }[],
+        trends: { operation: string; trend: TrendType; percentageChange: number }[],
         hotspots: { operation: string; frequency: number; averageDuration: number }[]
     ): string[] {
         const recommendations: string[] = [];
@@ -161,6 +171,34 @@ export class PerformanceLogger {
         return recommendations;
     }
 
+    private calculateTrend(operation: string): { operation: string; averageDuration: number; trend: TrendType; percentageChange: number } {
+        const metrics = this.metrics.get(operation) || [];
+        if (metrics.length < 2) {
+            return {
+                operation,
+                averageDuration: metrics[0]?.duration || 0,
+                trend: 'stable',
+                percentageChange: 0
+            };
+        }
+
+        const recent = metrics.slice(-5);
+        const averageDuration = recent.reduce((acc, m) => acc + m.duration, 0) / recent.length;
+        const oldAverage = metrics.slice(0, -5).reduce((acc, m) => acc + m.duration, 0) / (metrics.length - 5);
+        const percentageChange = ((averageDuration - oldAverage) / oldAverage) * 100;
+
+        const trend: TrendType = 
+            Math.abs(percentageChange) < PerformanceLogger.TREND_THRESHOLD ? 'stable' :
+            percentageChange < 0 ? 'improving' : 'degrading';
+
+        return {
+            operation,
+            averageDuration,
+            trend,
+            percentageChange: Math.abs(percentageChange)
+        };
+    }
+
     public async clearLogs(): Promise<void> {
         try {
             await chrome.storage.local.remove(PerformanceLogger.STORAGE_KEY);
@@ -168,5 +206,28 @@ export class PerformanceLogger {
         } catch (error) {
             this.logger.error('Error clearing performance logs:', error);
         }
+    }
+
+    logOperation(operation: string, duration: number): void {
+        const metric: PerformanceMetric = {
+            operation,
+            duration,
+            timestamp: Date.now()
+        };
+
+        const metrics = this.metrics.get(operation) || [];
+        metrics.push(metric);
+        this.metrics.set(operation, metrics);
+    }
+
+    generateReport(): PerformanceLog & { trends: Array<{ operation: string; averageDuration: number; trend: TrendType; percentageChange: number }> } {
+        const trends = Array.from(this.metrics.keys()).map(op => this.calculateTrend(op));
+        const flatMetrics = Array.from(this.metrics.values()).flat();
+
+        return {
+            metrics: flatMetrics,
+            timestamp: Date.now(),
+            trends
+        };
     }
 }

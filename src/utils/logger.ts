@@ -15,11 +15,12 @@ interface LogEntry {
 
 export class Logger {
     private static readonly MAX_LOGS = 1000;
-    private static instance: Logger;
+    private static instance: Logger | null;
     private context: string;
     private currentLevel: LogLevel;
 
-    private constructor(context: string, level: LogLevel = LogLevel.INFO) {
+    // Protected constructor for testing
+    protected constructor(context: string, level: LogLevel = LogLevel.INFO) {
         this.context = context;
         this.currentLevel = level;
         this.cleanOldLogs();
@@ -30,6 +31,16 @@ export class Logger {
             Logger.instance = new Logger(context, level);
         }
         return Logger.instance;
+    }
+
+    // Method for testing purposes
+    static createLogger(context: string, level: LogLevel = LogLevel.INFO): Logger {
+        return new Logger(context, level);
+    }
+
+    // For testing - allows resetting the singleton instance
+    static resetInstance(): void {
+        Logger.instance = null;
     }
 
     setLevel(level: LogLevel): void {
@@ -123,26 +134,37 @@ export class Logger {
     }
 
     private async saveLogs(entry: LogEntry): Promise<void> {
-        const { logs = [] } = await chrome.storage.local.get('logs');
-        logs.push(entry);
+        try {
+            if (typeof chrome === 'undefined' || !chrome.storage?.local) {
+                return; // Exit silently if chrome.storage is not available (e.g. in tests)
+            }
+            const { logs = [] } = await chrome.storage.local.get('logs');
+            logs.push(entry);
 
-        if (logs.length > Logger.MAX_LOGS) {
-            logs.splice(0, logs.length - Logger.MAX_LOGS);
+            if (logs.length > Logger.MAX_LOGS) {
+                logs.splice(0, logs.length - Logger.MAX_LOGS);
+            }
+
+            await chrome.storage.local.set({ logs });
+        } catch (error) {
+            console.warn('Failed to save logs:', error);
         }
-
-        await chrome.storage.local.set({ logs });
     }
 
     private async cleanOldLogs(): Promise<void> {
-        const { logs = [] } = await chrome.storage.local.get('logs');
-        const thirtyDaysAgo = new Date();
-        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-
-        const filteredLogs = logs.filter((log: LogEntry) => 
-            new Date(log.timestamp) > thirtyDaysAgo
-        );
-
-        await chrome.storage.local.set({ logs: filteredLogs });
+        try {
+            if (typeof chrome === 'undefined' || !chrome.storage?.local) {
+                return; // Exit silently if chrome.storage is not available (e.g. in tests)
+            }
+            const result = await chrome.storage.local.get('logs');
+            const { logs = [] } = result || {};
+            if (logs.length > Logger.MAX_LOGS) {
+                const newLogs = logs.slice(-Logger.MAX_LOGS);
+                await chrome.storage.local.set({ logs: newLogs });
+            }
+        } catch (error) {
+            console.warn('Failed to clean old logs:', error);
+        }
     }
 
     private notifyError(entry: LogEntry): void {

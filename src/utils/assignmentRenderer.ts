@@ -1,11 +1,11 @@
+import { Logger } from './logger';
 import { Assignment } from '../types/models';
-import { Logger } from '../utils/logger';
 
 export class AssignmentRenderer {
     private logger: Logger;
 
     constructor() {
-        this.logger = new Logger('AssignmentRenderer');
+        this.logger = Logger.createLogger('AssignmentRenderer');
     }
 
     public renderAssignment(assignment: Assignment): HTMLElement {
@@ -16,7 +16,7 @@ export class AssignmentRenderer {
         assignmentElement.innerHTML = `
             <div class="course-name">${this.escapeHtml(assignment.course)}</div>
             <div class="assignment-header">
-                <span class="assignment-type type-${assignment.type}">${this.capitalizeFirstLetter(assignment.type)}</span>
+                <span class="assignment-type type-${this.capitalizeFirstLetter(assignment.type)}">${this.capitalizeFirstLetter(assignment.type)}</span>
                 <span class="priority-score">${Math.round(assignment.priorityScore * 100)}%</span>
             </div>
             <div class="assignment-title">${this.escapeHtml(assignment.title)}</div>

@@ -3,10 +3,22 @@ import { backgroundService } from '../../src/background';
 import { ChromeMessage, MessageCallback } from '../../src/types/chrome';
 
 describe('BackgroundService', () => {
-    let mockMessageHandler: jest.Mock;
+    let mockMessageHandler: any;
+    let installedCallback: any;
 
     beforeEach(() => {
+        jest.clearAllMocks();
         jest.useFakeTimers();
+
+        // Mock chrome.runtime.onInstalled
+        chrome.runtime.onInstalled.addListener = jest.fn((callback) => {
+            installedCallback = callback;
+        });
+
+        // Mock chrome.runtime.onMessage
+        chrome.runtime.onMessage.addListener = jest.fn((handler) => {
+            mockMessageHandler = handler;
+        });
 
         // Setup storage mocks first
         (chrome.storage.local.get as jest.Mock)

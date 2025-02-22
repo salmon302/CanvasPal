@@ -1,4 +1,6 @@
-import { Assignment } from "../utils/priorityCalculator";
+import type { Assignment } from '../types/models';
+import { Logger } from '../utils/logger';
+import { PriorityCalculator } from '../utils/priorityCalculator';
 
 interface Settings {
     icalUrl?: string;

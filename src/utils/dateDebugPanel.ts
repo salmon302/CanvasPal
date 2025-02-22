@@ -21,7 +21,7 @@ export class DateDebugPanel {
     private logger: Logger;
 
     constructor() {
-        this.logger = new Logger('DateDebugPanel');
+        this.logger = Logger.createLogger('DateDebugPanel');
         this.createPanel();
     }
 

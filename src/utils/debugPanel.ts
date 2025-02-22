@@ -9,7 +9,7 @@ export class DebugPanel {
     private isVisible: boolean = false;
 
     constructor() {
-        this.logger = new Logger('DebugPanel');
+        this.logger = Logger.createLogger('DebugPanel');
         this.performanceMonitor = PerformanceMonitor.getInstance();
         this.createPanel();
         this.initializeKeyboardShortcut();

@@ -1,4 +1,4 @@
-import { PerformanceLogger } from '../../src/utils/performanceLogger';
+mport { PerformanceLogger } from '../../src/utils/performanceLogger';
 import { chrome } from 'jest-chrome';
 
 describe('PerformanceLogger', () => {
@@ -6,8 +6,8 @@ describe('PerformanceLogger', () => {
     const mockLog = {
         timestamp: Date.now(),
         metrics: [
-            { name: 'operation1', duration: 100 },
-            { name: 'operation2', duration: 200 }
+            { operation: 'operation1', duration: 100, timestamp: Date.now() },
+            { operation: 'operation2', duration: 200, timestamp: Date.now() }
         ],
         summary: {
             totalDuration: 300,
@@ -67,16 +67,16 @@ describe('PerformanceLogger', () => {
             {
                 timestamp: Date.now(),
                 metrics: [
-                    { name: 'op1', duration: 100 },
-                    { name: 'op2', duration: 150 }
+                    { operation: 'op1', duration: 100, timestamp: Date.now() },
+                    { operation: 'op2', duration: 150, timestamp: Date.now() }
                 ],
                 summary: { totalDuration: 250, averageDuration: 125, slowestOperation: 'op2', fastestOperation: 'op1' }
             },
             {
                 timestamp: Date.now() - 1000,
                 metrics: [
-                    { name: 'op1', duration: 120 },
-                    { name: 'op2', duration: 140 }
+                    { operation: 'op1', duration: 120, timestamp: Date.now() - 1000 },
+                    { operation: 'op2', duration: 140, timestamp: Date.now() - 1000 }
                 ],
                 summary: { totalDuration: 260, averageDuration: 130, slowestOperation: 'op2', fastestOperation: 'op1' }
             }

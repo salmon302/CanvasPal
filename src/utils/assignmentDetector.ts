@@ -11,7 +11,7 @@ export class AssignmentDetector {
     private performanceMonitor: PerformanceMonitor;
 
     constructor() {
-        this.logger = new Logger('AssignmentDetector');
+        this.logger = Logger.createLogger('AssignmentDetector');
         this.debugPanel = new DebugPanel();
         this.dateDebugger = new DateDebugger();
         this.performanceMonitor = PerformanceMonitor.getInstance();

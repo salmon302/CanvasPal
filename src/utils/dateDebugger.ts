@@ -67,7 +67,7 @@ export class DateDebugger {
     `;
 
     constructor() {
-        this.logger = new Logger('DateDebugger');
+        this.logger = Logger.createLogger('DateDebugger');
         this.debugPanel = new DateDebugPanel();
         this.injectDebugStyles();
     }

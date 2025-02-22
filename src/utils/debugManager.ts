@@ -2,7 +2,7 @@ import { Logger } from './logger';
 import { DebugPanel } from './debugPanel';
 import { DateDebugPanel } from './dateDebugPanel';
 import { PerformanceMonitor } from './performanceMonitor';
-import { PerformanceLogger } from './performanceLogger';
+import { PerformanceLogger, PerformanceLog, PerformanceMetric } from './performanceLogger';
 
 interface DebugConfig {
     enabled: boolean;
@@ -29,7 +29,7 @@ export class DebugManager {
     };
 
     constructor() {
-        this.logger = new Logger('DebugManager');
+        this.logger = Logger.createLogger('DebugManager');
         this.mainPanel = new DebugPanel();
         this.datePanel = new DateDebugPanel();
         this.performanceMonitor = PerformanceMonitor.getInstance();
@@ -193,5 +193,22 @@ export class DebugManager {
 
     public async getPerformanceAnalysis() {
         return this.performanceLogger.getPerformanceAnalysis();
+    }
+
+    public processPerformanceReport(report: PerformanceLog): void {
+        const validMetrics = report.metrics.filter(m => typeof m.duration === 'number');
+        const analysis = {
+            metrics: validMetrics,
+            timestamp: Date.now(),
+            summary: this.generateSummary(validMetrics)
+        };
+
+        this.mainPanel.displayPerformanceData(analysis);
+    }
+
+    private generateSummary(metrics: PerformanceMetric[]): string {
+        if (metrics.length === 0) return 'No performance data available';
+        const avgDuration = metrics.reduce((sum, m) => sum + m.duration, 0) / metrics.length;
+        return `Average operation duration: ${avgDuration.toFixed(2)}ms`;
     }
 }

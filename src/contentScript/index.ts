@@ -33,11 +33,15 @@ export class GradeDataScraper {
     public scrapeGradeData(): GradeData {
         try {
             const courseTitle = document.querySelector('.course-title');
-            if (!courseTitle) {
-                throw new Error('Course title element not found');
+            let courseTitleElement = document.querySelector('.course-title');
+            if (!courseTitleElement) {
+                courseTitleElement = document.querySelector('h1') || document.querySelector('h2');
+                if (!courseTitleElement) {
+                    throw new Error('Course title element not found');
+                }
             }
 
-            const courseName = courseTitle.textContent?.trim() || '';
+            const courseName = courseTitleElement.textContent?.trim() || '';
             if (!courseName) {
                 throw new Error('Invalid course name');
             }

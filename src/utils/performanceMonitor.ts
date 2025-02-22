@@ -1,4 +1,6 @@
 import { Logger } from './logger';
+import { DebugPanel } from './debugPanel';
+import { PriorityWeights } from '../types/models';
 
 interface PerformanceMetric {
     name: string;
@@ -28,9 +30,11 @@ export class PerformanceMonitor {
     private metrics: PerformanceMetric[] = [];
     private logger: Logger;
     private static instance: PerformanceMonitor;
+    private debugPanel: DebugPanel;
 
     private constructor() {
-        this.logger = new Logger('PerformanceMonitor');
+        this.logger = Logger.createLogger('PerformanceMonitor');
+        this.debugPanel = new DebugPanel();
     }
 
     public static getInstance(): PerformanceMonitor {
