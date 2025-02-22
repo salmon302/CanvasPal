@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CanvasPal Settings</title>
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+    <div class="settings-container">
+        <h1>CanvasPal Settings</h1>
+        
+        <section class="settings-section">
+            <h2>Canvas Integration</h2>
+            <div class="form-group">
+                <label for="icalUrl">Canvas iCalendar Feed URL</label>
+                <input type="url" id="icalUrl" placeholder="https://canvas.instructure.com/feeds/calendars/..." />
+            </div>
+        </section>
+
+        <section class="settings-section">
+            <h2>Priority Weights</h2>
+            <div class="form-group">
+                <label for="dueDateWeight">Due Date Impact</label>
+                <input type="range" id="dueDateWeight" min="0" max="100" value="40" />
+                <span class="weight-value">40%</span>
+            </div>
+            <div class="form-group">
+                <label for="gradeWeight">Grade Weight Impact</label>
+                <input type="range" id="gradeWeight" min="0" max="100" value="30" />
+                <span class="weight-value">30%</span>
+            </div>
+            <div class="form-group">
+                <label for="gradeImpact">Grade Impact</label>
+                <input type="range" id="gradeImpact" min="0" max="100" value="30" />
+                <span class="weight-value">30%</span>
+            </div>
+        </section>
+
+        <section class="settings-section">
+            <h2>Notifications</h2>
+            <div class="form-group">
+                <label for="notifyBefore">Notify before due date</label>
+                <select id="notifyBefore">
+                    <option value="86400">24 hours</option>
+                    <option value="43200">12 hours</option>
+                    <option value="7200">2 hours</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="notifyHighPriority" />
+                    Only notify for high priority assignments
+                </label>
+            </div>
+        </section>
+
+        <section class="settings-section">
+            <h2>Data Management</h2>
+            <div class="button-group">
+                <button id="exportData">Export Data</button>
+                <button id="importData">Import Data</button>
+                <input type="file" id="importFile" accept=".json" style="display: none;" />
+            </div>
+        </section>
+
+        <section class="settings-section">
+            <h2>Logs</h2>
+            <div class="form-group">
+                <select id="logLevel">
+                    <option value="ALL">All Logs</option>
+                    <option value="ERROR">Errors Only</option>
+                    <option value="WARN">Warnings and Errors</option>
+                </select>
+                <button id="viewLogs">View Logs</button>
+                <button id="downloadLogs">Download Logs</button>
+            </div>
+            <div id="logViewer" class="log-viewer"></div>
+        </section>
+
+        <div class="button-group">
+            <button id="saveSettings" class="primary">Save Settings</button>
+            <button id="resetSettings">Reset to Defaults</button>
+        </div>
+    </div>
+    <script src="settings.js"></script>
+</body>
+</html>

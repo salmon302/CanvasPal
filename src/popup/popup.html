@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>CanvasPal</title>
-	<link rel="stylesheet" href="styles/popup.css">
+    <title>CanvasPal</title>
+    <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-	<div id="app">
-		<h1>CanvasPal</h1>
-		<div id="assignments-list"></div>
-	</div>
-	<script src="index.js"></script>
+    <div class="container">
+        <header>
+            <h1>CanvasPal</h1>
+            <div class="status-bar">
+                <span id="sync-status">Synced</span>
+                <span id="data-freshness">Updated: Just now</span>
+            </div>
+        </header>
+
+        <div class="assignment-list" id="assignmentList">
+            <!-- Assignments will be populated here -->
+        </div>
+
+        <div class="settings-button">
+            <button id="openSettings">⚙️ Settings</button>
+        </div>
+    </div>
+    <script src="popup.js"></script>
 </body>
 </html>

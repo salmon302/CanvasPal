@@ -11,6 +11,18 @@ A Chrome extension that helps students prioritize Canvas assignments based on du
 - Assignment completion tracking
 - Real-time updates
 
+## GUI
+
+The extension provides an intuitive interface through a popup window when clicking the CanvasPal icon in Chrome:
+
+- **Dashboard**: Shows your upcoming assignments sorted by priority
+- **Priority Scores**: Visual indicators of assignment importance
+- **Due Dates**: Color-coded timeline of submission deadlines
+- **Grade Impact**: Visual representation of how each assignment affects your final grade
+- **Quick Actions**: Mark assignments as complete, set reminders, or hide items
+
+![CanvasPal Interface](docs/images/canvaspal-interface.png)
+
 ## Prerequisites
 
 - Node.js (v14 or higher)

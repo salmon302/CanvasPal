@@ -1,26 +1,29 @@
 {
-	"compilerOptions": {
-		"target": "ES2020",
-		"module": "ES2020",
-		"strict": true,
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true,
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"outDir": "./dist",
-		"rootDir": "./src",
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["src/*"]
-		},
-		"typeRoots": [
-			"./node_modules/@types",
-			"./src/types"
-		],
-		"types": ["chrome", "jest", "node"]
-	},
-	"include": ["src/**/*"],
-	"exclude": ["node_modules", "dist"]
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "commonjs",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node",
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "baseUrl": "src",
+        "paths": {
+            "@/*": ["./*"]
+        },
+        "typeRoots": ["./node_modules/@types", "./src/types"],
+        "types": ["chrome"],
+        "allowJs": true,
+        "declaration": true,
+        "lib": ["es2017", "dom"],
+        "noEmitOnError": true,
+        "pretty": true,
+        "diagnostics": true,
+        "extendedDiagnostics": true,
+        "listEmittedFiles": true
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
 }

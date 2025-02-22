@@ -1,12 +1,19 @@
-import ICAL from 'ical.js';
-import { GradeData } from "../contentScript";
-import { fetchCalendarData } from '../utils/calendar';
-import { calculatePriorities } from '../utils/priorities';
+import type { CalendarEvent, PrioritySettings, GradeData } from '../types/models';
+import { parseICalFeed } from '../utils/calendar';
+import { calculatePriority } from '../utils/priorities';
+import { logger, LogLevel } from '../utils/logger';
 
-export interface ICalEvent {
-    title: string;
-    dueDate: Date;
-    courseId: string;
+interface Settings {
+    icalUrl: string;
+    refreshInterval: number;
+    priorities: {
+        dueDate: number;
+        gradeWeight: number;
+        gradeImpact: number;
+    };
+}
+
+export interface ICalEvent extends CalendarEvent {
     gradeWeight?: number;
     pointsPossible?: number;
     currentScore?: number;
@@ -19,45 +26,53 @@ export class BackgroundService {
     private lastSyncTime = 0;
     private syncIntervalId?: number;
     private retryTimeoutId?: number;
+    private settings: Settings;
 
     constructor() {
+        this.settings = {
+            icalUrl: '',
+            refreshInterval: 30,
+            priorities: {
+                dueDate: 0.4,
+                gradeWeight: 0.3,
+                gradeImpact: 0.3
+            }
+        };
         this.initialize();
     }
 
     private async initialize(): Promise<void> {
-        const storedData = await chrome.storage.local.get(null);
-        Object.entries(storedData).forEach(([key, value]) => {
-            if (key.startsWith("grades_")) {
-                const courseName = key.replace("grades_", "");
-                this.gradeData[courseName] = value as GradeData;
-            }
-        });
+        // Load settings from sync storage
+        const { settings } = await chrome.storage.sync.get('settings');
+        if (settings) {
+            this.settings = settings;
+        } else {
+            // Initialize default settings if none exist
+            await chrome.storage.sync.set({ settings: this.settings });
+        }
 
-        chrome.runtime.onInstalled.addListener(() => {
-            this.startPeriodicSync();
+        // Set up message listeners
+        chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+            switch (message.type) {
+                case 'SETTINGS_UPDATED':
+                    this.settings = message.settings;
+                    void this.performSync();
+                    break;
+                case 'GET_ASSIGNMENTS':
+                    void this.fetchAndProcessAssignments()
+                        .then(sendResponse)
+                        .catch(error => sendResponse({ error: error.message }));
+                    return true;
+            }
         });
 
         this.startPeriodicSync();
+    }
 
-        chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
-            if (message.type === "fetchAssignments") {
-                this.fetchAndProcessAssignments()
-                    .then(sendResponse)
-                    .catch(error => sendResponse({ error: error.message }));
-                return true;
-            }
-            if (message.type === "gradeData") {
-                this.handleGradeData(message.data);
-                sendResponse({ success: true });
-                return true;
-            }
-            if (message.type === "forceSync") {
-                this.performSync()
-                    .then(() => sendResponse({ success: true }))
-                    .catch(error => sendResponse({ error: error.message }));
-                return true;
-            }
-        });
+    private async fetchCalendarData(url: string): Promise<CalendarEvent[]> {
+        const response = await fetch(url);
+        const icalData = await response.text();
+        return parseICalFeed(icalData);
     }
 
     private handleGradeData(data: GradeData): void {
@@ -92,8 +107,10 @@ export class BackgroundService {
 
             await this.fetchAndProcessAssignments();
             this.lastSyncTime = now;
+            await logger.log(LogLevel.INFO, 'Sync completed successfully');
             chrome.runtime.sendMessage({ type: "syncComplete", timestamp: now });
         } catch (error) {
+            await logger.log(LogLevel.ERROR, 'Sync failed', error);
             console.error("Sync failed:", error);
             const timeoutId = window.setTimeout(() => {
                 void this.performSync();
@@ -107,13 +124,15 @@ export class BackgroundService {
     }
 
     private async fetchAndProcessAssignments(): Promise<ICalEvent[]> {
-        const { icalUrl } = await chrome.storage.sync.get("icalUrl");
-        if (!icalUrl) {
+        if (!this.settings.icalUrl) {
             throw new Error("iCalendar URL not set");
         }
 
         try {
-            const response = await fetch(icalUrl);
+            const response = await fetch(this.settings.icalUrl);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch iCal feed: ${response.statusText}`);
+            }
             const icalData = await response.text();
             const assignments = this.parseICalData(icalData);
             return this.enrichAssignmentsWithGrades(assignments);
@@ -130,11 +149,11 @@ export class BackgroundService {
         }));
     }
 
-    private findGradeInfo(assignment: ICalEvent): Partial<ICalEvent> {
+    private findGradeInfo(assignment: CalendarEvent): Partial<ICalEvent> {
         const courseData = this.gradeData[assignment.courseId];
         if (!courseData) return {};
 
-        const gradeInfo = courseData.assignments.find(a => 
+        const gradeInfo = courseData.assignments.find((a: { name: string }) => 
             a.name.toLowerCase() === assignment.title.toLowerCase()
         );
 
@@ -148,29 +167,10 @@ export class BackgroundService {
     }
 
     private parseICalData(icalData: string): ICalEvent[] {
-        const jcalData = ICAL.parse(icalData);
-        const comp = new ICAL.Component(jcalData);
-        const events = comp.getAllSubcomponents("vevent");
-
-        return events.map(event => {
-            const titleValue = event.getFirstPropertyValue("summary");
-            const dueDateValue = event.getFirstPropertyValue("dtend");
-            const description = event.getFirstPropertyValue("description") || "";
-            
-            if (typeof titleValue !== "string") {
-                throw new Error("Invalid title format in iCal data");
-            }
-
-            if (!dueDateValue || typeof dueDateValue === "string") {
-                throw new Error("Invalid due date format in iCal data");
-            }
-
-            return {
-                title: titleValue,
-                dueDate: dueDateValue.toJSDate(),
-                courseId: this.extractCourseId(description.toString())
-            };
-        });
+        return parseICalFeed(icalData).map(event => ({
+            ...event,
+            courseId: this.extractCourseId(event.courseId)
+        }));
     }
 
     private extractCourseId(description: string): string {
@@ -181,32 +181,18 @@ export class BackgroundService {
 
 export const backgroundService = new BackgroundService();
 
-chrome.runtime.onInstalled.addListener(() => {
-  // Initialize default settings
-  chrome.storage.local.set({
-    calendarUrl: '',
-    priorities: {
-      dueDate: 0.4,
-      gradeWeight: 0.3,
-      gradeImpact: 0.3
-    }
-  });
-});
-
-// Set up periodic sync
+// Set up alarm listener for periodic sync
 chrome.alarms.create('sync', { periodInMinutes: 30 });
 
-chrome.alarms.onAlarm.addListener(async (alarm) => {
-  if (alarm.name === 'sync') {
-    try {
-      const { calendarUrl } = await chrome.storage.local.get('calendarUrl');
-      if (calendarUrl) {
-        const assignments = await fetchCalendarData(calendarUrl);
-        const prioritizedAssignments = calculatePriorities(assignments);
-        await chrome.storage.local.set({ assignments: prioritizedAssignments });
-      }
-    } catch (error) {
-      console.error('Sync failed:', error);
+chrome.alarms.onAlarm.addListener((alarm) => {
+    if (alarm.name === 'sync') {
+        void backgroundService.performSync();
     }
-  }
+});
+
+// Add keyboard command listener
+chrome.commands.onCommand.addListener((command) => {
+    if (command === 'refresh-assignments') {
+        void backgroundService.performSync();
+    }
 });

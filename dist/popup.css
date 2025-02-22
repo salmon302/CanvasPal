@@ -1,0 +1,53 @@
+.container {
+    width: 350px;
+    min-height: 400px;
+    padding: 16px;
+}
+
+header {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 16px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #2d3b45;
+}
+
+.status-bar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+    color: #666;
+    margin: 8px 0;
+}
+
+.assignment-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.assignment-item {
+    padding: 12px;
+    border: 1px solid #eee;
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+.assignment-item.high-priority {
+    border-left: 4px solid #d92b2b;
+}
+
+.assignment-item.medium-priority {
+    border-left: 4px solid #f0ad4e;
+}
+
+.assignment-item.low-priority {
+    border-left: 4px solid #5cb85c;
+}
+
+.settings-button {
+    margin-top: 16px;
+    text-align: center;
+}

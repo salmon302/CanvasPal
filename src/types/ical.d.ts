@@ -1,13 +1,27 @@
 declare module 'ical.js' {
-	interface ICalProperty {
-		toJSDate(): Date;
-	}
+    interface ICalComponent {
+        getAllSubcomponents(type: string): ICalComponent[];
+        getFirstPropertyValue(prop: string): string | { toJSDate(): Date };
+    }
+    
+    interface ICalEvent {
+        readonly summary: string;
+        readonly startDate: { toJSDate(): Date };
+        readonly uid: string;
+    }
+    
+    export class Component implements ICalComponent {
+        constructor(jCal: any);
+        getAllSubcomponents(type: string): Component[];
+        getFirstPropertyValue(prop: string): string | { toJSDate(): Date };
+    }
 
-	export class Component {
-		constructor(jCal: any);
-		getAllSubcomponents(name: string): Component[];
-		getFirstPropertyValue(name: string): string | ICalProperty;
-	}
+    export class Event implements ICalEvent {
+        constructor(component: Component);
+        readonly summary: string;
+        readonly startDate: { toJSDate(): Date };
+        readonly uid: string;
+    }
 
-	export function parse(input: string): any;
+    export function parse(input: string): any;
 }
