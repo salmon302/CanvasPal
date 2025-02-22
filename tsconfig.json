@@ -1,29 +1,36 @@
 {
     "compilerOptions": {
-        "target": "es2017",
-        "module": "commonjs",
+        "target": "ES2020",
+        "module": "CommonJS",
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "moduleResolution": "node",
         "outDir": "./dist",
-        "rootDir": "./src",
+        "rootDir": ".",
         "baseUrl": "src",
         "paths": {
             "@/*": ["./*"]
         },
         "typeRoots": ["./node_modules/@types", "./src/types"],
-        "types": ["chrome"],
+        "types": ["jest", "chrome", "node"],
         "allowJs": true,
         "declaration": true,
-        "lib": ["es2017", "dom"],
+        "lib": ["dom", "es2020"],
         "noEmitOnError": true,
         "pretty": true,
         "diagnostics": true,
         "extendedDiagnostics": true,
         "listEmittedFiles": true
     },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules"]
+    "include": [
+        "src/**/*",
+        "tests/**/*",
+        "jest.setup.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
 }
