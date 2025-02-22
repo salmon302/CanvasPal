@@ -1,3 +1,8 @@
+import { Assignment } from '../types/models';
+import { AssignmentRenderer } from '../utils/assignmentRenderer';
+import { Logger } from '../utils/logger';
+import { DebugManager } from '../utils/debugManager';
+
 interface Assignment {
     id: string;
     title: string;
@@ -19,126 +24,237 @@ interface Settings {
 }
 
 class PopupManager {
-    private assignmentList: HTMLElement;
-    private syncStatus: HTMLElement;
-    private dataFreshness: HTMLElement;
+    private assignments: Assignment[] = [];
+    private renderer: AssignmentRenderer;
+    private logger: Logger;
+    private debugManager: DebugManager;
+    private typeFilter: string = 'all';
+    private priorityFilter: string = 'all';
 
     constructor() {
-        this.assignmentList = document.getElementById('assignmentList')!;
-        this.syncStatus = document.getElementById('sync-status')!;
-        this.dataFreshness = document.getElementById('data-freshness')!;
+        this.renderer = new AssignmentRenderer();
+        this.logger = new Logger('PopupManager');
+        this.debugManager = new DebugManager();
         this.initializeEventListeners();
         this.loadAssignments();
+        this.initializeDebugFeatures();
     }
 
     private initializeEventListeners(): void {
+        document.getElementById('typeFilter')?.addEventListener('change', (e) => {
+            this.typeFilter = (e.target as HTMLSelectElement).value;
+            this.renderAssignments();
+        });
+
+        document.getElementById('priorityFilter')?.addEventListener('change', (e) => {
+            this.priorityFilter = (e.target as HTMLSelectElement).value;
+            this.renderAssignments();
+        });
+
+        document.getElementById('refreshData')?.addEventListener('click', () => {
+            this.loadAssignments();
+        });
+
         document.getElementById('openSettings')?.addEventListener('click', () => {
-            chrome.runtime.openOptionsPage();
+            if (chrome.runtime.openOptionsPage) {
+                chrome.runtime.openOptionsPage();
+            }
         });
 
         // Listen for sync updates
         chrome.runtime.onMessage.addListener((message) => {
             if (message.type === 'SYNC_COMPLETE') {
-                this.updateStatus('Synced', new Date());
+                this.updateLastSyncTime();
                 this.loadAssignments();
             } else if (message.type === 'SYNC_ERROR') {
-                this.updateStatus('Sync Failed', null);
+                this.showError('Sync Failed');
             } else if (message.type === 'ASSIGNMENTS_UPDATED') {
-                this.renderAssignments(message.assignments);
+                this.assignments = message.assignments;
+                this.renderAssignments();
             }
         });
     }
 
     private async loadAssignments(): Promise<void> {
-        this.assignmentList.innerHTML = '<div class="loading">Loading assignments...</div>';
         try {
-            // Check for settings and URL
-            const { settings } = await chrome.storage.sync.get('settings');
-            if (!settings) {
-                this.assignmentList.innerHTML = '<div class="error">Please configure your settings first</div>';
-                return;
-            }
-            if (!settings.icalUrl) {
-                this.assignmentList.innerHTML = '<div class="error">Please set your Canvas iCalendar Feed URL in settings</div>';
-                return;
+            this.setLoading(true);
+            
+            // Request assignment data from background script
+            const response = await chrome.runtime.sendMessage({ type: 'GET_ASSIGNMENTS' });
+            
+            if (response.error) {
+                throw new Error(response.error);
             }
 
-            const response = await chrome.runtime.sendMessage({ type: 'GET_ASSIGNMENTS' });
-            if (response.error) {
-                this.assignmentList.innerHTML = `<div class="error">Error: ${response.error}</div>`;
-                return;
-            }
-            if (!Array.isArray(response) || response.length === 0) {
-                this.assignmentList.innerHTML = '<div class="no-assignments">No assignments found</div>';
-                return;
-            }
-            this.renderAssignments(response);
+            this.assignments = response.assignments;
+            this.updateLastSyncTime();
+            this.renderAssignments();
         } catch (error) {
-            console.error('Error loading assignments:', error);
-            this.assignmentList.innerHTML = '<div class="error">Failed to load assignments</div>';
+            this.logger.error('Failed to load assignments:', error);
+            this.showError('Failed to load assignments. Please try again.');
+        } finally {
+            this.setLoading(false);
         }
     }
 
-    private renderAssignments(assignments: Assignment[]): void {
-        if (!assignments.length) {
-            this.assignmentList.innerHTML = '<div class="no-assignments">No assignments found</div>';
+    private renderAssignments(): void {
+        const container = document.getElementById('assignmentList');
+        if (!container) return;
+
+        container.innerHTML = '';
+
+        const filteredAssignments = this.filterAssignments();
+        
+        if (filteredAssignments.length === 0) {
+            container.innerHTML = '<div class="no-assignments">No assignments found</div>';
             return;
         }
 
-        const sortedAssignments = assignments.sort((a, b) => b.priorityScore - a.priorityScore);
-        this.assignmentList.innerHTML = sortedAssignments
-            .map(assignment => this.createAssignmentElement(assignment))
-            .join('');
+        filteredAssignments.forEach(assignment => {
+            const element = this.renderer.renderAssignment(assignment);
+            container.appendChild(element);
+        });
     }
 
-    private createAssignmentElement(assignment: Assignment): string {
-        const priorityClass = this.getPriorityClass(assignment.priorityScore);
-        const dueDate = new Date(assignment.dueDate);
-        return `
-            <div class="assignment-item ${priorityClass}" data-id="${assignment.id}">
-                <div class="assignment-header">
-                    <h3>${assignment.title}</h3>
-                    <div class="completion">
-                        <input type="checkbox" 
-                               id="complete-${assignment.id}"
-                               ${assignment.completed ? 'checked' : ''} 
-                               onchange="handleCompletionChange('${assignment.id}', this.checked)" />
-                    </div>
-                </div>
-                <div class="assignment-details">
-                    <div class="course">${assignment.course}</div>
-                    <div class="due-date">Due: ${dueDate.toLocaleDateString()} ${dueDate.toLocaleTimeString()}</div>
-                    ${assignment.gradeWeight ? `<div class="weight">Weight: ${assignment.gradeWeight}%</div>` : ''}
-                    <div class="priority">Priority: ${Math.round(assignment.priorityScore * 100)}%</div>
-                </div>
-            </div>
-        `;
+    private filterAssignments(): Assignment[] {
+        return this.assignments.filter(assignment => {
+            if (this.typeFilter !== 'all' && assignment.type !== this.typeFilter) {
+                return false;
+            }
+
+            if (this.priorityFilter !== 'all') {
+                const priority = assignment.priorityScore;
+                switch (this.priorityFilter) {
+                    case 'high':
+                        return priority >= 0.7;
+                    case 'medium':
+                        return priority >= 0.4 && priority < 0.7;
+                    case 'low':
+                        return priority < 0.4;
+                }
+            }
+
+            return true;
+        });
     }
 
-    private getPriorityClass(score: number): string {
-        if (score >= 0.7) return 'high-priority';
-        if (score >= 0.4) return 'medium-priority';
-        return 'low-priority';
-    }
-
-    private updateStatus(status: string, timestamp: Date | null): void {
-        this.syncStatus.textContent = status;
-        if (timestamp) {
-            this.dataFreshness.textContent = `Updated: ${timestamp.toLocaleTimeString()}`;
+    private setLoading(isLoading: boolean): void {
+        const status = document.getElementById('sync-status');
+        if (status) {
+            status.textContent = isLoading ? 'Syncing...' : 'Synced';
+            status.className = isLoading ? 'loading' : '';
         }
+    }
+
+    private showError(message: string): void {
+        const container = document.getElementById('assignmentList');
+        if (container) {
+            container.innerHTML = `<div class="error">${message}</div>`;
+        }
+    }
+
+    private updateLastSyncTime(): void {
+        const element = document.getElementById('data-freshness');
+        if (element) {
+            element.textContent = `Updated: Just now`;
+        }
+    }
+
+    public async handleCompletionToggle(assignmentId: string, completed: boolean): Promise<void> {
+        try {
+            await chrome.runtime.sendMessage({ 
+                type: 'UPDATE_ASSIGNMENT_COMPLETION',
+                assignmentId,
+                completed
+            });
+
+            // Update local assignment data
+            const assignment = this.assignments.find(a => a.id === assignmentId);
+            if (assignment) {
+                assignment.completed = completed;
+                this.renderAssignments();
+            }
+        } catch (error) {
+            this.logger.error('Failed to update assignment completion:', error);
+        }
+    }
+
+    private initializeDebugFeatures(): void {
+        if (this.debugManager.isDebugEnabled()) {
+            this.showDebugControls();
+        }
+
+        // Listen for debug mode changes
+        chrome.storage.onChanged.addListener((changes) => {
+            if (changes.debugConfig) {
+                const newConfig = changes.debugConfig.newValue;
+                if (newConfig.enabled) {
+                    this.showDebugControls();
+                } else {
+                    this.hideDebugControls();
+                }
+            }
+        });
+    }
+
+    private showDebugControls(): void {
+        const controls = document.getElementById('debug-controls');
+        if (!controls) {
+            const container = document.createElement('div');
+            container.id = 'debug-controls';
+            container.innerHTML = `
+                <div class="debug-toolbar">
+                    <button id="toggleDateDebug" class="debug-button" title="Toggle Date Debug (Ctrl/Cmd + Shift + T)">
+                        📅
+                    </button>
+                    <button id="toggleAssignmentDebug" class="debug-button" title="Toggle Assignment Debug (Ctrl/Cmd + Shift + D)">
+                        🔍
+                    </button>
+                    <button id="togglePriorityDebug" class="debug-button" title="Toggle Priority Debug">
+                        ⚡
+                    </button>
+                </div>
+            `;
+
+            const header = document.querySelector('header');
+            if (header) {
+                header.appendChild(container);
+                this.initializeDebugButtonListeners();
+            }
+        }
+    }
+
+    private hideDebugControls(): void {
+        const controls = document.getElementById('debug-controls');
+        if (controls) {
+            controls.remove();
+        }
+    }
+
+    private initializeDebugButtonListeners(): void {
+        document.getElementById('toggleDateDebug')?.addEventListener('click', () => {
+            this.debugManager.getDatePanel().toggleVisibility();
+        });
+
+        document.getElementById('toggleAssignmentDebug')?.addEventListener('click', () => {
+            this.debugManager.getMainPanel().toggleVisibility();
+        });
+
+        document.getElementById('togglePriorityDebug')?.addEventListener('click', () => {
+            const config = this.debugManager.getConfig();
+            this.debugManager.updateDebugConfig({
+                showPriorityDebug: !config.showPriorityDebug
+            });
+        });
     }
 }
 
-// Handle completion change globally
-(window as any).handleCompletionChange = (assignmentId: string, completed: boolean) => {
-    chrome.runtime.sendMessage({
-        type: 'UPDATE_COMPLETION',
-        assignmentId,
-        completed
-    });
-};
-
 // Initialize popup
-document.addEventListener('DOMContentLoaded', () => {
-    new PopupManager();
+window.addEventListener('DOMContentLoaded', () => {
+    const popup = new PopupManager();
+    
+    // Expose completion handler for inline event handlers
+    (window as any).handleCompletionToggle = (id: string, completed: boolean) => {
+        popup.handleCompletionToggle(id, completed);
+    };
 });

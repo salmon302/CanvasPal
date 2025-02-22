@@ -1,7 +1,10 @@
-import type { CalendarEvent, PrioritySettings, GradeData } from '../types/models';
+import type { CalendarEvent, PrioritySettings, GradeData, Assignment } from '../types/models';
 import { parseICalFeed } from '../utils/calendar';
 import { calculatePriority } from '../utils/priorities';
 import { logger, LogLevel } from '../utils/logger';
+import { AssignmentDetector } from '../utils/assignmentDetector';
+import { PriorityCalculator } from '../utils/priorityCalculator';
+import { Logger } from '../utils/logger';
 
 interface Settings {
     icalUrl: string;
@@ -27,6 +30,10 @@ export class BackgroundService {
     private syncIntervalId?: number;
     private retryTimeoutId?: number;
     private settings: Settings;
+    private assignments: Assignment[] = [];
+    private detector: AssignmentDetector;
+    private priorityCalculator: PriorityCalculator;
+    private logger: Logger;
 
     constructor() {
         this.settings = {
@@ -38,7 +45,12 @@ export class BackgroundService {
                 gradeImpact: 0.3
             }
         };
+        this.detector = new AssignmentDetector();
+        this.priorityCalculator = new PriorityCalculator();
+        this.logger = new Logger('BackgroundService');
         this.initialize();
+        this.initializeMessageHandlers();
+        this.setupAutoRefresh();
     }
 
     private async initialize(): Promise<void> {
@@ -67,6 +79,136 @@ export class BackgroundService {
         });
 
         this.startPeriodicSync();
+    }
+
+    private initializeMessageHandlers(): void {
+        chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+            this.handleMessage(message, sender, sendResponse);
+            return true; // Keep the message channel open for async response
+        });
+    }
+
+    private async handleMessage(
+        message: any, 
+        sender: chrome.runtime.MessageSender, 
+        sendResponse: (response?: any) => void
+    ): Promise<void> {
+        try {
+            switch (message.type) {
+                case 'GET_ASSIGNMENTS':
+                    const assignments = await this.getAssignments();
+                    sendResponse({ assignments });
+                    break;
+
+                case 'UPDATE_ASSIGNMENT_COMPLETION':
+                    await this.updateAssignmentCompletion(
+                        message.assignmentId,
+                        message.completed
+                    );
+                    sendResponse({ success: true });
+                    break;
+
+                case 'REFRESH_ASSIGNMENTS':
+                    await this.refreshAssignments();
+                    sendResponse({ success: true });
+                    break;
+
+                default:
+                    this.logger.warn('Unknown message type:', message);
+                    sendResponse({ error: 'Unknown message type' });
+            }
+        } catch (error) {
+            this.logger.error('Error handling message:', error);
+            sendResponse({ error: 'Internal error' });
+        }
+    }
+
+    private async getAssignments(): Promise<Assignment[]> {
+        if (this.assignments.length === 0) {
+            await this.refreshAssignments();
+        }
+        return this.assignments;
+    }
+
+    private async refreshAssignments(): Promise<void> {
+        try {
+            // Get assignments from detector
+            const newAssignments = await this.detector.detectAssignments();
+
+            // Calculate priorities for each assignment
+            newAssignments.forEach(assignment => {
+                assignment.priorityScore = this.priorityCalculator.calculatePriority(assignment);
+            });
+
+            // Sort by priority
+            newAssignments.sort((a, b) => b.priorityScore - a.priorityScore);
+
+            // Update stored assignments
+            this.assignments = newAssignments;
+
+            // Notify any open popups
+            this.notifyPopups();
+
+            this.logger.info('Assignments refreshed:', {
+                count: newAssignments.length,
+                types: this.getAssignmentTypeCounts(newAssignments)
+            });
+        } catch (error) {
+            this.logger.error('Error refreshing assignments:', error);
+            throw error;
+        }
+    }
+
+    private async updateAssignmentCompletion(
+        assignmentId: string,
+        completed: boolean
+    ): Promise<void> {
+        const assignment = this.assignments.find(a => a.id === assignmentId);
+        if (assignment) {
+            assignment.completed = completed;
+            await this.saveAssignments();
+            this.notifyPopups();
+        }
+    }
+
+    private async saveAssignments(): Promise<void> {
+        try {
+            await chrome.storage.local.set({ 
+                assignments: this.assignments,
+                lastUpdated: new Date().toISOString()
+            });
+        } catch (error) {
+            this.logger.error('Error saving assignments:', error);
+            throw error;
+        }
+    }
+
+    private notifyPopups(): void {
+        chrome.runtime.sendMessage({ 
+            type: 'ASSIGNMENTS_UPDATED',
+            assignments: this.assignments
+        }).catch(error => {
+            // Ignore errors - popups might not be open
+            this.logger.debug('No popups to notify:', error);
+        });
+    }
+
+    private setupAutoRefresh(): void {
+        // Refresh every 30 minutes
+        chrome.alarms.create('refreshAssignments', { periodInMinutes: 30 });
+        
+        chrome.alarms.onAlarm.addListener(async (alarm) => {
+            if (alarm.name === 'refreshAssignments') {
+                await this.refreshAssignments();
+            }
+        });
+    }
+
+    private getAssignmentTypeCounts(assignments: Assignment[]): Record<string, number> {
+        return assignments.reduce((counts, assignment) => {
+            counts[assignment.type] = (counts[assignment.type] || 0) + 1;
+            return counts;
+        }, {} as Record<string, number>);
     }
 
     private async fetchCalendarData(url: string): Promise<CalendarEvent[]> {

@@ -15,9 +15,11 @@ body {
 }
 
 header {
-	margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px;
 	border-bottom: 1px solid #eee;
-	padding-bottom: 8px;
 }
 
 header h1 {
@@ -181,4 +183,188 @@ header h1 {
 
 input[type="range"] {
 	width: 100%;
+}
+
+.assignment-item {
+    margin: 8px 0;
+    padding: 12px;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.assignment-item:hover {
+    transform: translateX(2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Priority-based styling */
+.high-priority {
+    border-left-color: #ff6b6b;
+}
+
+.medium-priority {
+    border-left-color: #ffd700;
+}
+
+.low-priority {
+    border-left-color: #90EE90;
+}
+
+/* Assignment type indicators */
+.assignment-type {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    margin-right: 8px;
+}
+
+.type-quiz {
+    background-color: #87ceeb;
+    color: #1a5f7a;
+}
+
+.type-discussion {
+    background-color: #98fb98;
+    color: #2d5a2d;
+}
+
+.type-announcement {
+    background-color: #dda0dd;
+    color: #614661;
+}
+
+.type-assignment {
+    background-color: #ff69b4;
+    color: #8b3a62;
+}
+
+/* Points and grade weight display */
+.points-display {
+    background-color: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    display: inline-block;
+}
+
+/* Course name styling */
+.course-name {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 4px;
+}
+
+/* Priority score display */
+.priority-score {
+    float: right;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.high-priority .priority-score {
+    background-color: rgba(255, 107, 107, 0.2);
+    color: #cc5555;
+}
+
+.medium-priority .priority-score {
+    background-color: rgba(255, 215, 0, 0.2);
+    color: #ac9310;
+}
+
+.low-priority .priority-score {
+    background-color: rgba(144, 238, 144, 0.2);
+    color: #3d8b3d;
+}
+
+/* Details section */
+.assignment-details {
+    margin-top: 8px;
+    font-size: 0.9em;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+}
+
+.detail-icon {
+    margin-right: 6px;
+    opacity: 0.7;
+}
+
+/* Completion checkbox styling */
+.completion {
+    float: right;
+}
+
+.completion input[type="checkbox"] {
+    transform: scale(1.2);
+    margin: 0;
+    cursor: pointer;
+}
+
+/* Loading and error states */
+.loading, .error, .no-assignments {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.error {
+    color: #ff6b6b;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 400px) {
+    .assignment-item {
+        padding: 8px;
+    }
+    
+    .priority-score {
+        float: none;
+        display: inline-block;
+        margin-top: 4px;
+    }
+}
+
+.debug-toolbar {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+    padding: 4px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+.debug-button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.debug-button:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.debug-button.active {
+    background: rgba(76, 175, 80, 0.2);
+}
+
+/* Ensure status bar works with debug controls */
+.status-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 10px;
 }

@@ -20,3 +20,42 @@ export interface GradeData {
         pointsPossible: number;
     }>;
 }
+
+export type AssignmentType = 'assignment' | 'quiz' | 'discussion' | 'announcement';
+
+export interface AssignmentDetails {
+    submissionType?: string[];
+    isCompleted: boolean;
+    isLocked: boolean;
+    description?: string;
+}
+
+export interface Assignment {
+    id: string;
+    title: string;
+    dueDate: Date;
+    course: string;
+    courseId?: string;
+    gradeWeight?: number;
+    courseGrade?: number;
+    points?: number;
+    maxPoints?: number;
+    priorityScore: number;
+    completed: boolean;
+    type: AssignmentType;
+    url?: string;
+    details?: AssignmentDetails;
+}
+
+export interface PriorityWeights {
+    GRADE_IMPACT: number;
+    COURSE_GRADE: number;
+    DUE_DATE: number;
+}
+
+export interface AssignmentGroup {
+    id: string;
+    name: string;
+    weight: number;
+    courseId: string;
+}

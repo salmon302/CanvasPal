@@ -1,126 +1,138 @@
 import { PriorityCalculator } from '../../src/utils/priorityCalculator';
+import { Assignment } from '../../src/types/models';
 
 describe('PriorityCalculator', () => {
-	const baseAssignment = {
-		title: 'Test Assignment',
-		dueDate: new Date(),
-		courseId: 'COURSE101',
-		completed: false
-	};
+    let calculator: PriorityCalculator;
+    const baseAssignment: Assignment = {
+        id: '1',
+        title: 'Test Assignment',
+        dueDate: new Date(),
+        course: 'Test Course',
+        type: 'assignment',
+        points: 100,
+        maxPoints: 100,
+        completed: false,
+        priorityScore: 0
+    };
 
-	const baseWeights = {
-		dueDate: 33,
-		gradeWeight: 33,
-		impact: 34
-	};
+    beforeEach(() => {
+        calculator = new PriorityCalculator();
+        jest.useFakeTimers();
+        jest.setSystemTime(new Date('2024-01-15'));
+    });
 
-	describe('Due Date Factor', () => {
-		it('should give higher priority to assignments due sooner', () => {
-			const now = new Date();
-			const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
-			const nextWeek = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+    afterEach(() => {
+        jest.useRealTimers();
+    });
 
-			const urgent = { ...baseAssignment, dueDate: tomorrow };
-			const later = { ...baseAssignment, dueDate: nextWeek };
+    describe('calculatePriority', () => {
+        it('should give higher priority to assignments due sooner', () => {
+            const soonAssignment = {
+                ...baseAssignment,
+                dueDate: new Date('2024-01-16') // Due tomorrow
+            };
 
-			const urgentPriority = PriorityCalculator.calculatePriority(urgent, [urgent, later], baseWeights);
-			const laterPriority = PriorityCalculator.calculatePriority(later, [urgent, later], baseWeights);
+            const laterAssignment = {
+                ...baseAssignment,
+                dueDate: new Date('2024-01-30') // Due in 15 days
+            };
 
-			expect(urgentPriority).toBeGreaterThan(laterPriority);
-		});
+            const soonPriority = calculator.calculatePriority(soonAssignment);
+            const laterPriority = calculator.calculatePriority(laterAssignment);
 
-		it('should apply urgency bonus for critical deadlines', () => {
-			const now = new Date();
-			const critical = new Date(now.getTime() + 12 * 60 * 60 * 1000); // 12 hours
-			const normal = new Date(now.getTime() + 5 * 24 * 60 * 60 * 1000); // 5 days
+            expect(soonPriority).toBeGreaterThan(laterPriority);
+        });
 
-			const criticalAssignment = { ...baseAssignment, dueDate: critical };
-			const normalAssignment = { ...baseAssignment, dueDate: normal };
+        it('should give higher priority to assignments with higher grade impact', () => {
+            const highImpact = {
+                ...baseAssignment,
+                points: 100,
+                maxPoints: 100,
+                gradeWeight: 0.4
+            };
 
-			const criticalPriority = PriorityCalculator.calculatePriority(
-				criticalAssignment,
-				[criticalAssignment, normalAssignment],
-				baseWeights
-			);
-			const normalPriority = PriorityCalculator.calculatePriority(
-				normalAssignment,
-				[criticalAssignment, normalAssignment],
-				baseWeights
-			);
+            const lowImpact = {
+                ...baseAssignment,
+                points: 10,
+                maxPoints: 100,
+                gradeWeight: 0.1
+            };
 
-			expect(criticalPriority).toBeGreaterThan(normalPriority * 1.2);
-		});
-	});
+            const highPriority = calculator.calculatePriority(highImpact);
+            const lowPriority = calculator.calculatePriority(lowImpact);
 
-	describe('Grade Weight Factor', () => {
-		it('should prioritize assignments with higher grade weights', () => {
-			const highWeight = { ...baseAssignment, gradeWeight: 40 };
-			const lowWeight = { ...baseAssignment, gradeWeight: 10 };
+            expect(highPriority).toBeGreaterThan(lowPriority);
+        });
 
-			const highPriority = PriorityCalculator.calculatePriority(highWeight, [highWeight, lowWeight], baseWeights);
-			const lowPriority = PriorityCalculator.calculatePriority(lowWeight, [highWeight, lowWeight], baseWeights);
+        it('should give higher priority to assignments in courses with lower grades', () => {
+            const lowGradeCourse = {
+                ...baseAssignment,
+                courseGrade: 0.65 // 65%
+            };
 
-			expect(highPriority).toBeGreaterThan(lowPriority);
-		});
+            const highGradeCourse = {
+                ...baseAssignment,
+                courseGrade: 0.95 // 95%
+            };
 
-		it('should normalize weights within the same course', () => {
-			const assignments = [
-				{ ...baseAssignment, courseId: 'COURSE1', gradeWeight: 20 },
-				{ ...baseAssignment, courseId: 'COURSE1', gradeWeight: 40 },
-				{ ...baseAssignment, courseId: 'COURSE2', gradeWeight: 10 },
-				{ ...baseAssignment, courseId: 'COURSE2', gradeWeight: 20 }
-			];
+            const lowGradePriority = calculator.calculatePriority(lowGradeCourse);
+            const highGradePriority = calculator.calculatePriority(highGradeCourse);
 
-			const course1Priority = PriorityCalculator.calculatePriority(assignments[1], assignments, baseWeights);
-			const course2Priority = PriorityCalculator.calculatePriority(assignments[3], assignments, baseWeights);
+            expect(lowGradePriority).toBeGreaterThan(highGradePriority);
+        });
 
-			expect(Math.abs(course1Priority - course2Priority)).toBeLessThan(0.1);
-		});
-	});
+        it('should apply type-specific weight modifiers correctly', () => {
+            const quiz = {
+                ...baseAssignment,
+                type: 'quiz' as const
+            };
 
-	describe('Impact Factor', () => {
-		it('should prioritize assignments with greater potential grade impact', () => {
-			const highImpact = {
-				...baseAssignment,
-				pointsPossible: 100,
-				currentScore: 60
-			};
-			const lowImpact = {
-				...baseAssignment,
-				pointsPossible: 100,
-				currentScore: 90
-			};
+            const discussion = {
+                ...baseAssignment,
+                type: 'discussion' as const
+            };
 
-			const highPriority = PriorityCalculator.calculatePriority(highImpact, [highImpact, lowImpact], baseWeights);
-			const lowPriority = PriorityCalculator.calculatePriority(lowImpact, [highImpact, lowImpact], baseWeights);
+            const quizPriority = calculator.calculatePriority(quiz);
+            const discussionPriority = calculator.calculatePriority(discussion);
 
-			expect(highPriority).toBeGreaterThan(lowPriority);
-		});
+            expect(quizPriority).toBeGreaterThan(discussionPriority);
+        });
 
-		it('should apply higher multiplier for grades below C threshold', () => {
-			const belowC = {
-				...baseAssignment,
-				pointsPossible: 100,
-				currentScore: 65
-			};
-			const aboveC = {
-				...baseAssignment,
-				pointsPossible: 100,
-				currentScore: 75
-			};
+        it('should handle missing optional fields gracefully', () => {
+            const minimalAssignment = {
+                id: '1',
+                title: 'Minimal Assignment',
+                dueDate: new Date('2024-01-20'),
+                course: 'Test Course',
+                type: 'assignment' as const,
+                completed: false,
+                priorityScore: 0
+            };
 
-			const lowGradePriority = PriorityCalculator.calculatePriority(belowC, [belowC, aboveC], baseWeights);
-			const highGradePriority = PriorityCalculator.calculatePriority(aboveC, [belowC, aboveC], baseWeights);
+            const priority = calculator.calculatePriority(minimalAssignment);
+            expect(priority).toBeGreaterThanOrEqual(0);
+            expect(priority).toBeLessThanOrEqual(1);
+        });
 
-			expect(lowGradePriority).toBeGreaterThan(highGradePriority);
-		});
-	});
+        it('should respect custom priority weights', () => {
+            calculator.setPriorityWeights({
+                GRADE_IMPACT: 0.6,
+                COURSE_GRADE: 0.2,
+                DUE_DATE: 0.2
+            });
 
-	describe('Completion Status', () => {
-		it('should give zero priority to completed assignments', () => {
-			const completed = { ...baseAssignment, completed: true };
-			const priority = PriorityCalculator.calculatePriority(completed, [completed], baseWeights);
-			expect(priority).toBe(0);
-		});
-	});
+            const assignment = {
+                ...baseAssignment,
+                points: 100,
+                maxPoints: 100,
+                gradeWeight: 0.4,
+                courseGrade: 0.8,
+                dueDate: new Date('2024-01-20')
+            };
+
+            const priority = calculator.calculatePriority(assignment);
+            expect(priority).toBeGreaterThan(0);
+            expect(priority).toBeLessThan(1);
+        });
+    });
 });

@@ -1,8 +1,8 @@
 export enum LogLevel {
-    ERROR = 'ERROR',
-    WARN = 'WARN',
-    INFO = 'INFO',
-    DEBUG = 'DEBUG'
+    DEBUG = 0,
+    INFO = 1,
+    WARN = 2,
+    ERROR = 3
 }
 
 interface LogEntry {
@@ -16,32 +16,110 @@ interface LogEntry {
 export class Logger {
     private static readonly MAX_LOGS = 1000;
     private static instance: Logger;
+    private context: string;
+    private currentLevel: LogLevel;
 
-    private constructor() {
+    private constructor(context: string, level: LogLevel = LogLevel.INFO) {
+        this.context = context;
+        this.currentLevel = level;
         this.cleanOldLogs();
     }
 
-    static getInstance(): Logger {
+    static getInstance(context: string, level: LogLevel = LogLevel.INFO): Logger {
         if (!Logger.instance) {
-            Logger.instance = new Logger();
+            Logger.instance = new Logger(context, level);
         }
         return Logger.instance;
     }
 
-    async log(level: LogLevel, message: string, data?: any): Promise<void> {
-        const entry: LogEntry = {
-            timestamp: new Date().toISOString(),
-            level,
-            message,
-            data,
-            stack: Error().stack
-        };
+    setLevel(level: LogLevel): void {
+        this.currentLevel = level;
+    }
 
-        await this.saveLogs(entry);
+    debug(message: string, data?: any): void {
+        this.log(LogLevel.DEBUG, message, data);
+    }
 
-        if (level === LogLevel.ERROR) {
-            this.notifyError(entry);
+    info(message: string, data?: any): void {
+        this.log(LogLevel.INFO, message, data);
+    }
+
+    warn(message: string, data?: any): void {
+        this.log(LogLevel.WARN, message, data);
+    }
+
+    error(message: string, data?: any): void {
+        this.log(LogLevel.ERROR, message, data);
+    }
+
+    private log(level: LogLevel, message: string, data?: any): void {
+        if (level >= this.currentLevel) {
+            const timestamp = new Date().toISOString();
+            const prefix = this.getLogPrefix(level);
+            const formattedMessage = `[${timestamp}] ${prefix} [${this.context}] ${message}`;
+
+            if (data) {
+                const formattedData = this.formatLogData(data);
+                console.log(formattedMessage, formattedData);
+            } else {
+                console.log(formattedMessage);
+            }
+
+            const entry: LogEntry = {
+                timestamp,
+                level,
+                message,
+                data,
+                stack: Error().stack
+            };
+
+            this.saveLogs(entry);
+
+            if (level === LogLevel.ERROR) {
+                this.notifyError(entry);
+            }
         }
+    }
+
+    private getLogPrefix(level: LogLevel): string {
+        switch (level) {
+            case LogLevel.DEBUG:
+                return '🔍 DEBUG:';
+            case LogLevel.INFO:
+                return '📢 INFO:';
+            case LogLevel.WARN:
+                return '⚠️ WARN:';
+            case LogLevel.ERROR:
+                return '❌ ERROR:';
+            default:
+                return '📢';
+        }
+    }
+
+    private formatLogData(data: any): any {
+        if (data instanceof Element) {
+            return {
+                tagName: data.tagName,
+                id: data.id,
+                className: data.className,
+                textContent: data.textContent?.substring(0, 100) + '...',
+                html: data.outerHTML?.substring(0, 200) + '...'
+            };
+        }
+
+        if (Array.isArray(data)) {
+            return data.map(item => this.formatLogData(item));
+        }
+
+        if (data && typeof data === 'object') {
+            const formatted: Record<string, any> = {};
+            for (const [key, value] of Object.entries(data)) {
+                formatted[key] = this.formatLogData(value);
+            }
+            return formatted;
+        }
+
+        return data;
     }
 
     private async saveLogs(entry: LogEntry): Promise<void> {
@@ -83,4 +161,4 @@ export class Logger {
     }
 }
 
-export const logger = Logger.getInstance();
+export const logger = Logger.getInstance('default');

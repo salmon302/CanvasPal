@@ -2,63 +2,223 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+h1 {
+    color: #333;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .settings-section {
     margin-bottom: 30px;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.form-group {
-    margin-bottom: 15px;
+h2 {
+    color: #444;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.4em;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+/* Priority Weight Sliders */
+.weight-sliders {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.form-group input[type="url"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.slider-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.form-group input[type="range"] {
-    width: 80%;
-    margin-right: 10px;
+.slider-group label {
+    min-width: 150px;
+    color: #555;
+}
+
+.slider-group input[type="range"] {
+    flex: 1;
+    height: 4px;
+    background: #ddd;
+    border-radius: 2px;
+    appearance: none;
+}
+
+.slider-group input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #4CAF50;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.slider-group input[type="range"]::-webkit-slider-thumb:hover {
+    background: #45a049;
 }
 
 .weight-value {
-    display: inline-block;
-    min-width: 45px;
+    min-width: 60px;
+    text-align: right;
+    color: #666;
 }
 
-.button-group {
+/* Type Weights */
+.type-weights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.weight-input {
     display: flex;
-    gap: 10px;
-    justify-content: flex-end;
+    flex-direction: column;
+    gap: 8px;
 }
 
-button {
-    padding: 8px 16px;
-    border-radius: 4px;
+.weight-input label {
+    color: #555;
+    font-size: 0.9em;
+}
+
+.weight-input input[type="number"] {
+    padding: 8px;
     border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+/* Display Options */
+.display-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
     cursor: pointer;
 }
 
-button.primary {
-    background-color: #0066cc;
-    color: white;
-    border: none;
+/* Refresh Settings */
+.refresh-settings {
+    display: flex;
+    gap: 20px;
 }
 
-button:hover {
-    opacity: 0.9;
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group input[type="number"] {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100px;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button.primary {
+    background: #4CAF50;
+    color: white;
+}
+
+button.primary:hover {
+    background: #45a049;
+}
+
+button.secondary {
+    background: #f5f5f5;
+    color: #333;
+}
+
+button.secondary:hover {
+    background: #e0e0e0;
+}
+
+button.success {
+    background: #4CAF50;
+}
+
+button.error {
+    background: #f44336;
+}
+
+/* Validation Messages */
+.weight-validation {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.weight-validation.error {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.weight-validation.success {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .settings-container {
+        padding: 10px;
+    }
+
+    .slider-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .weight-value {
+        text-align: left;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+    }
 }
 
 .notification {
@@ -88,5 +248,98 @@ button:hover {
     to {
         transform: translateY(0);
         opacity: 1;
+    }
+}
+
+/* Debug Settings Section */
+.debug-options {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.debug-panels {
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 6px;
+}
+
+.debug-panels h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.1em;
+    color: #444;
+}
+
+.shortcut-hint {
+    margin-left: 10px;
+    padding: 2px 6px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    font-size: 0.8em;
+    color: #666;
+    font-family: monospace;
+}
+
+.debug-info {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-left: 4px solid #17a2b8;
+    border-radius: 4px;
+}
+
+.info-text {
+    margin: 0 0 10px 0;
+    color: #495057;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.shortcut-info {
+    margin: 0;
+    font-size: 0.9em;
+    color: #495057;
+}
+
+.shortcut-info strong {
+    color: #212529;
+}
+
+/* Debug Panel Select */
+#logLevel {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+    width: 150px;
+}
+
+#logLevel:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+/* Debug Checkbox Styling */
+.debug-panels .checkbox-group {
+    margin: 10px 0;
+}
+
+/* Debug Panel Disabled State */
+.debug-options[disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .debug-panels {
+        padding: 10px;
+    }
+
+    .shortcut-hint {
+        display: block;
+        margin: 5px 0 0 24px;
     }
 }

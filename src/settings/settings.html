@@ -18,26 +18,73 @@
 
         <section class="settings-section">
             <h2>Priority Weights</h2>
-            <div class="form-group">
-                <label for="dueDateWeight">Due Date Impact</label>
-                <input type="range" id="dueDateWeight" min="0" max="100" value="40" />
-                <span class="weight-value">40%</span>
+            <div class="weight-sliders">
+                <div class="slider-group">
+                    <label for="gradeImpact">Grade Impact Weight</label>
+                    <input type="range" id="gradeImpact" min="0" max="100" value="40">
+                    <span class="weight-value" id="gradeImpactValue">40%</span>
+                </div>
+                <div class="slider-group">
+                    <label for="courseGrade">Course Grade Weight</label>
+                    <input type="range" id="courseGrade" min="0" max="100" value="30">
+                    <span class="weight-value" id="courseGradeValue">30%</span>
+                </div>
+                <div class="slider-group">
+                    <label for="dueDate">Due Date Weight</label>
+                    <input type="range" id="dueDate" min="0" max="100" value="30">
+                    <span class="weight-value" id="dueDateValue">30%</span>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="gradeWeight">Grade Weight Impact</label>
-                <input type="range" id="gradeWeight" min="0" max="100" value="30" />
-                <span class="weight-value">30%</span>
+            <div class="weight-validation" id="weightValidation"></div>
+        </section>
+
+        <section class="settings-section">
+            <h2>Assignment Types</h2>
+            <div class="type-weights">
+                <div class="weight-input">
+                    <label for="quizWeight">Quiz Weight Multiplier</label>
+                    <input type="number" id="quizWeight" min="0.1" max="2.0" step="0.1" value="1.2">
+                </div>
+                <div class="weight-input">
+                    <label for="assignmentWeight">Assignment Weight Multiplier</label>
+                    <input type="number" id="assignmentWeight" min="0.1" max="2.0" step="0.1" value="1.0">
+                </div>
+                <div class="weight-input">
+                    <label for="discussionWeight">Discussion Weight Multiplier</label>
+                    <input type="number" id="discussionWeight" min="0.1" max="2.0" step="0.1" value="0.8">
+                </div>
+                <div class="weight-input">
+                    <label for="announcementWeight">Announcement Weight Multiplier</label>
+                    <input type="number" id="announcementWeight" min="0.1" max="2.0" step="0.1" value="0.5">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="gradeImpact">Grade Impact</label>
-                <input type="range" id="gradeImpact" min="0" max="100" value="30" />
-                <span class="weight-value">30%</span>
+        </section>
+
+        <section class="settings-section">
+            <h2>Display Options</h2>
+            <div class="display-options">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="showCourseNames" checked>
+                    <label for="showCourseNames">Show Course Names</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="showGradeImpact" checked>
+                    <label for="showGradeImpact">Show Grade Impact</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="showPriorityScores" checked>
+                    <label for="showPriorityScores">Show Priority Scores</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="highlightOverdue" checked>
+                    <label for="highlightOverdue">Highlight Overdue Assignments</label>
+                </div>
             </div>
         </section>
 
         <section class="settings-section">
             <h2>Notifications</h2>
-            <div class="form-group">
+            <div class="form-group"></div>
                 <label for="notifyBefore">Notify before due date</label>
                 <select id="notifyBefore">
                     <option value="86400">24 hours</option>
@@ -76,9 +123,69 @@
             <div id="logViewer" class="log-viewer"></div>
         </section>
 
+        <section class="settings-section">
+            <h2>Refresh Settings</h2>
+            <div class="refresh-settings">
+                <div class="input-group">
+                    <label for="refreshInterval">Auto-refresh Interval (minutes)</label>
+                    <input type="number" id="refreshInterval" min="5" max="120" value="30">
+                </div>
+            </div>
+        </section>
+
+        <section class="settings-section" id="debugSettings">
+            <h2>Debug Settings</h2>
+            <div class="debug-options">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="debugEnabled">
+                    <label for="debugEnabled">Enable Debug Mode</label>
+                </div>
+
+                <div class="input-group">
+                    <label for="logLevel">Log Level</label>
+                    <select id="logLevel">
+                        <option value="debug">Debug</option>
+                        <option value="info">Info</option>
+                        <option value="warn">Warning</option>
+                        <option value="error">Error</option>
+                    </select>
+                </div>
+
+                <div class="debug-panels">
+                    <h3>Debug Panels</h3>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="showDateDebug">
+                        <label for="showDateDebug">Show Date Detection Debug</label>
+                        <span class="shortcut-hint">Ctrl/Cmd + Shift + T</span>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="showAssignmentDebug">
+                        <label for="showAssignmentDebug">Show Assignment Detection Debug</label>
+                        <span class="shortcut-hint">Ctrl/Cmd + Shift + D</span>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="showPriorityDebug">
+                        <label for="showPriorityDebug">Show Priority Calculation Debug</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="debug-info">
+                <p class="info-text">
+                    Debug mode provides additional tools and information for development and troubleshooting.
+                    Use keyboard shortcuts to toggle debug panels while viewing Canvas pages.
+                </p>
+                <p class="shortcut-info">
+                    <strong>Global Debug Toggle:</strong> Ctrl/Cmd + Shift + `
+                </p>
+            </div>
+        </section>
+
         <div class="button-group">
             <button id="saveSettings" class="primary">Save Settings</button>
-            <button id="resetSettings">Reset to Defaults</button>
+            <button id="resetSettings" class="secondary">Reset to Defaults</button>
         </div>
     </div>
     <script src="settings.js"></script>

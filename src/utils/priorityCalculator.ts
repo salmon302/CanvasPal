@@ -1,3 +1,8 @@
+import { Assignment, PriorityWeights } from '../types/models';
+import { Logger } from './logger';
+import { DebugPanel } from './debugPanel';
+import { PerformanceMonitor } from './performanceMonitor';
+
 export interface Assignment {
     title: string;
     dueDate: Date;
@@ -15,101 +20,115 @@ export interface PriorityWeights {
 }
 
 export class PriorityCalculator {
-    private static readonly GRADE_THRESHOLDS = {
-        A: 90,
-        B: 80,
-        C: 70,
-        D: 60,
-        F: 0
+    private readonly PRIORITY_WEIGHTS: PriorityWeights = {
+        GRADE_IMPACT: 0.4,
+        COURSE_GRADE: 0.3,
+        DUE_DATE: 0.3
     };
 
-    private static readonly URGENCY_THRESHOLDS = {
-        CRITICAL: 24 * 60 * 60 * 1000,  // 24 hours
-        HIGH: 72 * 60 * 60 * 1000,      // 3 days
-        MEDIUM: 168 * 60 * 60 * 1000    // 1 week
-    };
+    private logger: Logger;
+    private debugPanel: DebugPanel;
+    private performanceMonitor: PerformanceMonitor;
 
-    private static normalizeWeights(weights: PriorityWeights): PriorityWeights {
-        const total = weights.dueDate + weights.gradeWeight + weights.impact;
-        return {
-            dueDate: weights.dueDate / total,
-            gradeWeight: weights.gradeWeight / total,
-            impact: weights.impact / total
-        };
+    constructor() {
+        this.logger = new Logger('PriorityCalculator');
+        this.debugPanel = new DebugPanel();
+        this.performanceMonitor = PerformanceMonitor.getInstance();
     }
 
-    private static calculateDueDateFactor(assignment: Assignment, allAssignments: Assignment[]): number {
-        const now = new Date().getTime();
-        const dueTime = assignment.dueDate.getTime();
-        const timeRemaining = Math.max(0, dueTime - now);
+    public calculatePriority(assignment: Assignment): number {
+        return this.performanceMonitor.monitor('calculatePriority', () => {
+            try {
+                const metrics = {
+                    daysUntilDue: this.performanceMonitor.monitor('calculateDaysUntilDue', 
+                        () => this.calculateDaysUntilDue(assignment.dueDate)),
+                    gradeImpact: this.performanceMonitor.monitor('calculateGradeImpact', 
+                        () => this.calculateGradeImpact(assignment)),
+                    courseGradeImpact: this.performanceMonitor.monitor('calculateCourseGradeImpact', 
+                        () => this.calculateCourseGradeImpact(assignment)),
+                    typeWeight: this.performanceMonitor.monitor('getTypeWeight', 
+                        () => this.getTypeWeight(assignment.type))
+                };
 
-        if (timeRemaining <= 0) return 1;
+                // Calculate individual components
+                const components = this.performanceMonitor.monitor('calculateComponents', () => ({
+                    gradeComponent: metrics.gradeImpact * this.PRIORITY_WEIGHTS.GRADE_IMPACT,
+                    courseComponent: metrics.courseGradeImpact * this.PRIORITY_WEIGHTS.COURSE_GRADE,
+                    dateComponent: this.calculateDueDatePriority(metrics.daysUntilDue) * this.PRIORITY_WEIGHTS.DUE_DATE
+                }));
 
-        let urgencyBonus = 0;
-        if (timeRemaining <= this.URGENCY_THRESHOLDS.CRITICAL) {
-            urgencyBonus = 0.3;
-        } else if (timeRemaining <= this.URGENCY_THRESHOLDS.HIGH) {
-            urgencyBonus = 0.2;
-        } else if (timeRemaining <= this.URGENCY_THRESHOLDS.MEDIUM) {
-            urgencyBonus = 0.1;
+                // Calculate final priority
+                const finalPriority = this.performanceMonitor.monitor('calculateFinalPriority', () => {
+                    const basePriority = components.gradeComponent + components.courseComponent + components.dateComponent;
+                    return Math.min(Math.max(basePriority * metrics.typeWeight, 0), 1);
+                });
+
+                // Log calculation details to debug panel
+                this.debugPanel.logDetectionEvent('Priority calculation:', {
+                    assignment: assignment.title,
+                    components,
+                    metrics,
+                    finalPriority,
+                    performance: this.performanceMonitor.getReport()
+                });
+
+                return finalPriority;
+            } catch (error) {
+                this.logger.error('Error calculating priority:', error);
+                return 0;
+            }
+        }, { assignmentTitle: assignment.title });
+    }
+
+    private calculateDaysUntilDue(dueDate: Date): number {
+        const now = new Date();
+        const diffTime = dueDate.getTime() - now.getTime();
+        return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    }
+
+    private calculateDueDatePriority(daysUntilDue: number): number {
+        if (daysUntilDue <= 0) return 1; // Overdue assignments get highest priority
+        if (daysUntilDue >= 14) return 0.2; // Far future assignments get low priority
+        return 1 - (daysUntilDue / 14); // Linear decrease in priority over 14 days
+    }
+
+    private calculateGradeImpact(assignment: Assignment): number {
+        if (!assignment.points || !assignment.maxPoints) return 0.5; // Default impact if no points info
+        return Math.min(assignment.points / 100, 1); // Normalize to 0-1 range
+    }
+
+    private calculateCourseGradeImpact(assignment: Assignment): number {
+        if (!assignment.courseGrade) return 0.85; // Default if no course grade available
+        return 1 - assignment.courseGrade; // Lower grades mean higher priority
+    }
+
+    private getTypeWeight(type: Assignment['type']): number {
+        switch (type) {
+            case 'quiz':
+                return 1.2; // Quizzes get 20% boost
+            case 'assignment':
+                return 1.0; // Standard weight
+            case 'discussion':
+                return 0.8; // Discussions slightly lower
+            case 'announcement':
+                return 0.5; // Announcements lowest priority
+            default:
+                return 1.0;
+        }
+    }
+
+    public setPriorityWeights(weights: Partial<PriorityWeights>): void {
+        const totalWeight = (weights.GRADE_IMPACT || this.PRIORITY_WEIGHTS.GRADE_IMPACT) +
+                          (weights.COURSE_GRADE || this.PRIORITY_WEIGHTS.COURSE_GRADE) +
+                          (weights.DUE_DATE || this.PRIORITY_WEIGHTS.DUE_DATE);
+
+        if (Math.abs(totalWeight - 1) > 0.001) {
+            this.logger.warn('Priority weights do not sum to 1. Using default weights.');
+            return;
         }
 
-        const latestDueDate = Math.max(...allAssignments.map(a => a.dueDate.getTime()));
-        const totalTime = Math.max(latestDueDate - now, 1);
-        const baseFactor = 1 - (timeRemaining / totalTime);
-
-        return Math.min(1, baseFactor + urgencyBonus);
-    }
-
-    private static calculateGradeWeightFactor(assignment: Assignment, allAssignments: Assignment[]): number {
-        const weight = assignment.gradeWeight || 0;
-        if (weight === 0) return 0;
-
-        const courseAssignments = allAssignments.filter(a => a.courseId === assignment.courseId);
-        const maxWeight = Math.max(...courseAssignments.map(a => a.gradeWeight || 0));
-        
-        const relativeWeight = weight / (maxWeight || 100);
-        const absoluteWeight = weight / 100;
-        
-        return (relativeWeight + absoluteWeight) / 2;
-    }
-
-    private static calculateImpactFactor(assignment: Assignment): number {
-        if (!assignment.pointsPossible || !assignment.currentScore) {
-            return 0.5;
-        }
-
-        const currentPercent = (assignment.currentScore / assignment.pointsPossible) * 100;
-        const potentialPoints = assignment.pointsPossible - assignment.currentScore;
-        const maxPotentialPoints = assignment.pointsPossible;
-        const potentialImpact = potentialPoints / maxPotentialPoints;
-
-        let impactMultiplier = 1;
-        if (currentPercent < this.GRADE_THRESHOLDS.C) {
-            impactMultiplier = 1.5;
-        } else if (currentPercent < this.GRADE_THRESHOLDS.B) {
-            impactMultiplier = 1.2;
-        } else if (currentPercent >= this.GRADE_THRESHOLDS.A) {
-            impactMultiplier = 0.8;
-        }
-
-        return Math.min(1, potentialImpact * impactMultiplier);
-    }
-
-    public static calculatePriority(
-        assignment: Assignment,
-        allAssignments: Assignment[],
-        weights: PriorityWeights
-    ): number {
-        if (assignment.completed) return 0;
-
-        const normalizedWeights = this.normalizeWeights(weights);
-        const dueDateFactor = this.calculateDueDateFactor(assignment, allAssignments);
-        const gradeWeightFactor = this.calculateGradeWeightFactor(assignment, allAssignments);
-        const impactFactor = this.calculateImpactFactor(assignment);
-
-        return (dueDateFactor * normalizedWeights.dueDate) +
-               (gradeWeightFactor * normalizedWeights.gradeWeight) +
-               (impactFactor * normalizedWeights.impact);
+        Object.assign(this.PRIORITY_WEIGHTS, weights);
+        this.logger.info('Priority weights updated:', this.PRIORITY_WEIGHTS);
+        this.debugPanel.logDetectionEvent('Priority weights updated:', this.PRIORITY_WEIGHTS);
     }
 }

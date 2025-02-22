@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>CanvasPal</title>
-    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="styles/popup.css">
 </head>
 <body>
     <div class="container">
@@ -14,12 +14,29 @@
             </div>
         </header>
 
+        <div class="filters">
+            <select id="typeFilter">
+                <option value="all">All Types</option>
+                <option value="assignment">Assignments</option>
+                <option value="quiz">Quizzes</option>
+                <option value="discussion">Discussions</option>
+                <option value="announcement">Announcements</option>
+            </select>
+            <select id="priorityFilter">
+                <option value="all">All Priorities</option>
+                <option value="high">High Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="low">Low Priority</option>
+            </select>
+        </div>
+
         <div class="assignment-list" id="assignmentList">
             <!-- Assignments will be populated here -->
         </div>
 
-        <div class="settings-button">
-            <button id="openSettings">⚙️ Settings</button>
+        <div class="controls">
+            <button id="openSettings" class="settings-button">⚙️ Settings</button>
+            <button id="refreshData" class="refresh-button">🔄 Refresh</button>
         </div>
     </div>
     <script src="popup.js"></script>
